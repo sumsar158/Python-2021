@@ -46,8 +46,8 @@ How many times to repeat: 3
 Hello world! Hello world! Hello world!
 
 """
-greeting_type = str(input("Enter a greeting "))
+greeting = str(input("Enter a greeting "))
 recipient = str(input("Enter the name of recipient "))
 repeat_amount = int(input("How many times "))
-greeting = (greeting_type + " " + recipient + " ")
-print(greeting * repeat_amount)
+greeting_type = (greeting + " " + recipient + " ")
+print(greeting_type * repeat_amount)
