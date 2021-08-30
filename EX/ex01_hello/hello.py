@@ -33,9 +33,9 @@ color = str(input("Roses are ..."))
 objects = str(input("... are blue"))
 activity = str(input("I love to ..."))
 
-print(f"Roses are {color}, \n"
-      f"{objects} are blue, \n"
-      f"I love to {activity} \n"
+print(f"Roses are {color},\n"
+      f"{objects} are blue,\n"
+      f"I love to {activity}\n"
       f"And so will you!")
 
 """
