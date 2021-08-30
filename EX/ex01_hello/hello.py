@@ -20,19 +20,19 @@ print(f"{random_number} + {second_number} is {answer}")
 2. Poem
 Example output:
 
-Roses are red,  
-violets are blue,  
-I love to code  
+Roses are red,
+violets are blue,
+I love to code
 And so will you!
 
 """
 
 color = str(input("Roses are ..."))
-objects = str(input("violets are ..."))
+objects = str(input("... are blue"))
 activity = str(input("I love to ..."))
 
 print(f"Roses are {color}, \n"
-      f"violets are {objects}, \n"
+      f"{objects} are blue, \n"
       f"I love to {activity} \n"
       f"And so will you!")
 
