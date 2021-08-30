@@ -1,4 +1,5 @@
 """EX01 hello."""
+
 """
 1. Print Hello
 Example output:
@@ -10,12 +11,13 @@ Great! Now enter a second random number: 4
 
 """
 name = input("What  is your name? ")
-random_number = int(input(f"Hello, {name}! Enter a random number: "))
-second_number = int(input("Great! Now enter a second random number: "))
+num1 = int(input(f"Hello, {name}! Enter a random number: "))
+num2 = int(input("Great! Now enter a second random number: "))
 
-answer = random_number + second_number
+answer = num1 + num2
 
-print(f"{random_number} + {second_number} is {answer}")
+print(f"{num1} + {num2} is {answer}")
+
 """
 2. Poem
 Example output:
