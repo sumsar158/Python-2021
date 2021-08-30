@@ -1,2 +1,2 @@
-"""Write program that prints hello world"""
+"""Write program that prints hello world."""
 print("Hello world!")
