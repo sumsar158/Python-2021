@@ -3,7 +3,8 @@
 
 def ects(ects, weeks):
     """
-    Implement a function to know how many hours are needed per week if each ECTS is 26 hours. If it's not possible in
+    Implement a function to know how many hours are needed per week if each ECTS is 26 hours.
+    If it's not possible in
     time then return a string "Impossible!".
 
     Examples:
@@ -22,7 +23,8 @@ def ects(ects, weeks):
 
 def average(a, b, c, d):
     """
-    Implement a function that has 4 numeric parameters. Each parameter must be multiplied by number of its position
+    Implement a function that has 4 numeric parameters.
+    Each parameter must be multiplied by number of its position
     in the function (x, y, z = 1, 2, 3). Calculate and return the average.
 
     Examples:
