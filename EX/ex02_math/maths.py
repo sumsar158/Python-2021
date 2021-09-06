@@ -38,7 +38,8 @@ def average(a, b, c, d):
 
 def clock(päevad, tunnid, minutid, sekundid):
     """
-    Implement a function that has 4 numeric parameters. The values are: days, hours, minutes, seconds. Calculate how many
+    Implement a function that has 4 numeric parameters.
+    The values are: days, hours, minutes, seconds. Calculate how many
     minutes are in total and return the value.
 
     Examples:

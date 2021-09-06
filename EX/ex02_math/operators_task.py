@@ -1,5 +1,6 @@
 """Operators."""
 
+
 def add(x, y):
     """Add x to y."""
     return x + y
@@ -41,7 +42,6 @@ def first_greater_or_equal(x, y):
         return True
     else:
         return False
-
 
 
 def second_less_or_equal(x, y):
@@ -90,7 +90,7 @@ def surface(a: int, b: int) -> int:
     return a*b
 
 
-def volume(a: int, b: int, c:int) ->int:
+def volume(a, b, c):
     """Add the missing parameters to calculate the volume. Calculate and return the value of volume."""
     return a*b*c
 
@@ -109,5 +109,3 @@ if __name__ == '__main__':
     print(x_is_not_y(1, 2))  # True
     print(if_else(1, 3, 5, 99))  # 3
     print(if_else(2, 1, 10, 5))  # 0
-    print(surface(1, 2)) # 2
-    print(volume(5, 5, 5)) # 125
