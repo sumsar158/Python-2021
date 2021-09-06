@@ -33,7 +33,8 @@ def average(a, b, c, d):
     b = b * 2
     c = c * 3
     d = d * 4
-    return (a+b+c+d)/4
+
+    return (a + b + c + d) / 4
 
 
 def clock(päevad, tunnid, minutid, sekundid):

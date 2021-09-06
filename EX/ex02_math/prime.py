@@ -1,5 +1,6 @@
 """Primes identifier."""
 
+
 def is_prime_number(number: int) -> bool:
     """
     Check if the parameter number is a prime number.
