@@ -202,7 +202,6 @@ def is_valid_control_number(id_code: str) -> bool:
 
     if sum_of_id_code % 11 >= 10:
         weight = 2
-
         for num in id_code:
             while step < 10:
                 a = int(num) * weight
@@ -212,8 +211,8 @@ def is_valid_control_number(id_code: str) -> bool:
                 weight = weight + 1
                 step = step + 1
 
-    if sum_of_id_code % 11 >= 10:
-        sum_of_id_code = 0
+        if sum_of_id_code % 11 >= 10:
+            sum_of_id_code = 0
 
     sum_of_id_code = sum_of_id_code % 11
 
