@@ -187,7 +187,37 @@ def is_valid_control_number(id_code: str) -> bool:
     :param id_code: string
     :return: boolean
     """
-    pass
+    step = 0
+    weight = 0
+    sum_of_id_code = 0
+
+    for num in id_code:
+        while step < 10:
+            a = int(num) * weight
+            sum_of_id_code += a
+            if weight == 9:
+                weight = 0
+            weight = weight + 1
+            step = step + 1
+
+    if sum_of_id_code % 11 == 10:
+        weight = 2
+
+        for num in id_code:
+            while step < 10:
+                a = int(num) * weight
+                sum_of_id_code += a
+                if weight == 9:
+                    weight = 0
+                weight = weight + 1
+                step = step + 1
+
+    sum_of_id_code = sum_of_id_code % 11
+
+    if sum_of_id_code == int(id_code[-1]):
+        return True
+    else:
+        return False
 
 
 def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
@@ -231,16 +261,27 @@ def get_data_from_id(id_code: str) -> str:
 
 if __name__ == '__main__':
 
-    print("\nYear number:")
-    print(is_valid_year_number(100))  # -> False
-    print(is_valid_year_number(50))  # -> true
-    print(is_valid_year_number(1))  # -> true
+    print("\nControl number:")
+    print(is_valid_control_number("49808270244"))  # -> True
+    print(is_valid_control_number("60109200187"))  # -> False, it must be 6
 
-    print("\nMonth number:")
-    print(is_valid_month_number(2))  # -> True
-    print(is_valid_month_number(15))  # -> False
-
-    print("\nBorn order number:")
-    print(is_valid_birth_number(0))  # -> False
-    print(is_valid_birth_number(1))  # -> True
-    print(is_valid_birth_number(850))  # -> True
+    # print("\nDay number:")
+    # print(is_valid_day_number(4, 5, 12, 25))  # -> True
+    # print(is_valid_day_number(3, 10, 8, 32))  # -> False
+    # print("\nFebruary check:")
+    # print(
+    #     is_valid_day_number(4, 96, 2, 30))  # -> False (February cannot contain more than 29 days in any circumstances)
+    # print(is_valid_day_number(4, 99, 2, 29))  # -> False (February contains 29 days only during leap year)
+    # print(is_valid_day_number(4, 8, 2, 29))  # -> True
+    # print("\nMonth contains 30 or 31 days check:")
+    # print(is_valid_day_number(4, 22, 4, 31))  # -> False (April contains max 30 days)
+    # print(is_valid_day_number(4, 18, 10, 31))  # -> True
+    # print(is_valid_day_number(4, 15, 9, 31))  # -> False (September contains max 30 days)
+    #
+    # print("\nOverall ID check::")
+    # print(is_id_valid("49808270244"))  # -> True
+    # print(is_id_valid("12345678901"))  # -> False
+    #
+    # print("\nFull message:")
+    # print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998 in Tallinn."
+    # print(get_data_from_id("60109200187"))  # -> "Given invalid ID code!"
