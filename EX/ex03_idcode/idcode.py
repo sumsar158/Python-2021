@@ -80,7 +80,7 @@ def is_valid_month_number(month_number: int) -> bool:
     :param month_number: int
     :return: boolean
     """
-    if 1 < month_number < 13:
+    if 0 < month_number < 13:
         return True
     else:
         return False
@@ -93,7 +93,7 @@ def is_valid_birth_number(birth_number: int):
     :param birth_number: int
     :return: boolean
     """
-    if 1 <= birth_number <= 32:
+    if 0 < birth_number < 33:
         return True
     else:
         return False
