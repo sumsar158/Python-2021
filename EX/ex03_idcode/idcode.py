@@ -124,7 +124,26 @@ def get_birth_place(birth_number: int) -> str:
     :param birth_number: int
     :return: str
     """
-    pass
+    if 0 < birth_number < 11:
+        return "Kuressaare"
+    elif 10 < birth_number < 21:
+        return "Tartu"
+    elif 20 < birth_number < 221:
+        return "Tallinn"
+    elif 220 < birth_number < 271:
+        return "Kohtla-Järve"
+    elif 270 < birth_number < 371:
+        return "Tartu"
+    elif 370 < birth_number < 421:
+        return "Narva"
+    elif 420 < birth_number < 471:
+        return "Pärnu"
+    elif 470 < birth_number < 711:
+        return "Tallinn"
+    elif 710 < birth_number < 1000:
+        return "undefined"
+    else:
+        return 'Wrong input!'
 
 
 def get_full_year(gender_number: int, year_number: int) -> int:
@@ -138,7 +157,25 @@ def get_full_year(gender_number: int, year_number: int) -> int:
     :param year_number: int
     :return: int
     """
-    pass
+    year = ""
+
+    if is_valid_year_number(year_number):
+        if is_valid_gender_number(gender_number):
+            if gender_number == 1 or gender_number == 2:
+                year = "18"
+            elif gender_number == 3 or gender_number == 4:
+                year = "19"
+            elif gender_number == 5 or gender_number == 6:
+                year = "20"
+
+    year_number = str(year_number)
+    if len(year_number) < 2:
+        year_number = "0" + year_number
+
+    full_year = year + year_number
+    full_year = int(full_year)
+
+    return full_year
 
 
 def is_valid_control_number(id_code: str) -> bool:
