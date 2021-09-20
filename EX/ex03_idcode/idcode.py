@@ -208,10 +208,10 @@ def is_valid_control_number(id_code: str) -> bool:
                 multiplier = 0
             multiplier += 1
 
-    if sum_of_id_code % 11 >= 10:
-        sum_of_id_code = 0
-
     sum_of_id_code = sum_of_id_code % 11
+
+    if sum_of_id_code >= 10:
+        sum_of_id_code = 0
 
     if sum_of_id_code == int(id_code[-1]):
         return True
@@ -264,6 +264,8 @@ if __name__ == '__main__':
     print(is_valid_control_number("49808270244"))  # -> True
     print(is_valid_control_number("60109200187"))  # -> False, it must be 6
     print(is_valid_control_number("37605030299"))  # -> True
+    print(is_valid_control_number("39810176031"))  # -> True
+
 
 
     # print("\nDay number:")
