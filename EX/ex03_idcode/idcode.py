@@ -187,32 +187,29 @@ def is_valid_control_number(id_code: str) -> bool:
     :param id_code: string
     :return: boolean
     """
-    step = 0
-    weight = 0
+    multiplier = 1
     sum_of_id_code = 0
+    id_code_list = list(id_code)
+    id_code_list.pop()
 
-    for num in id_code:
-        while step < 10:
-            a = int(num) * weight
-            sum_of_id_code += a
-            if weight == 9:
-                weight = 0
-            weight += 1
-            step += 1
+    for num in id_code_list:
+        a = int(num) * multiplier
+        sum_of_id_code += a
+        if multiplier == 9:
+            multiplier = 0
+        multiplier += 1
 
     if sum_of_id_code % 11 >= 10:
-        weight = 3
-        for num in id_code:
-            while step < 10:
-                a = int(num) * weight
-                sum_of_id_code += a
-                if weight == 9:
-                    weight = 0
-                weight += 1
-                step += 1
+        multiplier = 3
+        for num in id_code_list:
+            a = int(num) * multiplier
+            sum_of_id_code += a
+            if multiplier == 9:
+                multiplier = 0
+            multiplier += 1
 
-        if sum_of_id_code % 11 >= 10:
-            sum_of_id_code = 0
+    if sum_of_id_code % 11 >= 10:
+        sum_of_id_code = 0
 
     sum_of_id_code = sum_of_id_code % 11
 
@@ -266,6 +263,8 @@ if __name__ == '__main__':
     print("\nControl number:")
     print(is_valid_control_number("49808270244"))  # -> True
     print(is_valid_control_number("60109200187"))  # -> False, it must be 6
+    print(is_valid_control_number("37605030299"))  # -> True
+
 
     # print("\nDay number:")
     # print(is_valid_day_number(4, 5, 12, 25))  # -> True
