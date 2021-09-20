@@ -67,7 +67,7 @@ def is_valid_year_number(year_number: int) -> bool:
     :param year_number: int
     :return: boolean
     """
-    if 100 > year_number > 0:
+    if 100 > year_number > 9:
         return True
     else:
         return False
