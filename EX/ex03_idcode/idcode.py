@@ -67,7 +67,7 @@ def is_valid_year_number(year_number: int) -> bool:
     :param year_number: int
     :return: boolean
     """
-    if 100 > year_number > 9:
+    if 100 > year_number > 0:
         return True
     else:
         return False
@@ -266,14 +266,11 @@ if __name__ == '__main__':
     print(is_valid_control_number("37605030299"))  # -> True
     print(is_valid_control_number("39810176031"))  # -> True
 
-
-
     # print("\nDay number:")
     # print(is_valid_day_number(4, 5, 12, 25))  # -> True
     # print(is_valid_day_number(3, 10, 8, 32))  # -> False
     # print("\nFebruary check:")
     # print(
-    #     is_valid_day_number(4, 96, 2, 30))  # -> False (February cannot contain more than 29 days in any circumstances)
     # print(is_valid_day_number(4, 99, 2, 29))  # -> False (February contains 29 days only during leap year)
     # print(is_valid_day_number(4, 8, 2, 29))  # -> True
     # print("\nMonth contains 30 or 31 days check:")
