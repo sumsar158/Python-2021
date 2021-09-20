@@ -38,10 +38,7 @@ def is_valid_gender_number(number: int) -> bool:
     :param number: int
     :return: boolean
     """
-    if 0 < number < 7:
-        return True
-    else:
-        return False
+    return 0 < number < 7
 
 
 def get_gender(number: int) -> str:
@@ -67,10 +64,7 @@ def is_valid_year_number(year_number: int) -> bool:
     :param year_number: int
     :return: boolean
     """
-    if 100 > year_number > 0:
-        return True
-    else:
-        return False
+    return 100 > year_number > 0
 
 
 def is_valid_month_number(month_number: int) -> bool:
@@ -80,10 +74,7 @@ def is_valid_month_number(month_number: int) -> bool:
     :param month_number: int
     :return: boolean
     """
-    if 0 < month_number < 13:
-        return True
-    else:
-        return False
+    return 0 < month_number < 13
 
 
 def is_valid_birth_number(birth_number: int):
@@ -93,10 +84,7 @@ def is_valid_birth_number(birth_number: int):
     :param birth_number: int
     :return: boolean
     """
-    if 0 < birth_number < 1000:
-        return True
-    else:
-        return False
+    return 0 < birth_number < 1000
 
 
 def is_leap_year(year: int) -> bool:
