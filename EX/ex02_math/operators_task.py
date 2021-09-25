@@ -38,34 +38,22 @@ def exponent(x, y):
 
 def first_greater_or_equal(x, y):
     """If x is greater or equal than y then return True. If not then return False."""
-    if x >= y:
-        return True
-    else:
-        return False
+    return x >= y
 
 
 def second_less_or_equal(x, y):
     """If y is less or equal than x then return True. If not then return False."""
-    if y <= x:
-        return True
-    else:
-        return False
+    return y <= x
 
 
 def x_is_y(x, y):
     """If x same as y then return True. If not then return False."""
-    if x == y:
-        return True
-    else:
-        return False
+    return x == y
 
 
 def x_is_not_y(x, y):
     """If x is not same as y then return True. If not then return False."""
-    if x != y:
-        return True
-    else:
-        return False
+    return x != y
 
 
 def if_else(a, b, c, d):

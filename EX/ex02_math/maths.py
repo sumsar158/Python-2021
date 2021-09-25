@@ -41,7 +41,7 @@ def average(a, b, c, d):
     return (a + b + c + d) / 4
 
 
-def clock(päevad, tunnid, minutid, sekundid):
+def clock(days, hours, minutes, seconds):
     """
     Implement a function that has 4 numeric parameters.
 
@@ -53,8 +53,8 @@ def clock(päevad, tunnid, minutid, sekundid):
     3. clock(0, 0, 0, 60) == 1
     3. clock(0, 0, 1, 60) == 2
     """
-    days_in_minutes = päevad * 24 * 60
-    hours_in_minutes = tunnid * 60
-    seconds_in_minutes = sekundid / 60
+    days_in_minutes = days * 24 * 60
+    hours_in_minutes = hours * 60
+    seconds_in_minutes = seconds / 60
 
-    return days_in_minutes + hours_in_minutes + seconds_in_minutes + minutid
+    return days_in_minutes + hours_in_minutes + seconds_in_minutes + minutes

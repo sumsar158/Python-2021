@@ -25,18 +25,14 @@ def encode(message: str, shift: int) -> str:
     :param shift: shift for encoding
     :return: encoded message
     """
-    alphabet = list(string.ascii_lowercase)
+    alphabet = string.ascii_lowercase
     encrypted_message = []
 
     for letter in message:
         if letter in alphabet:
-            """finding the letters index in the alphabet."""
             index_of_letter = alphabet.index(letter)
-            """increasing the letters index by 'shift' amount."""
             shifted_index = (index_of_letter + shift) % 26
-            """finding the letter of shifted index."""
             encrypted_letter = alphabet[shifted_index]
-            """adding shifted letter to new_message list."""
             encrypted_message.append(encrypted_letter)
 
         else:
