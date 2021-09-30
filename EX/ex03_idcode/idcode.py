@@ -64,7 +64,7 @@ def is_valid_year_number(year_number: int) -> bool:
     :param year_number: int
     :return: boolean
     """
-    return 100 > year_number > 0
+    return 100 > year_number >= 0
 
 
 def is_valid_month_number(month_number: int) -> bool:
@@ -219,6 +219,9 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
     :param day_number: int
     :return: boolean
     """
+    # if month_number == 2:
+    #     full_year = get_full_year(gender_number, year_number)
+    #     leap_year = is_leap_year(full_year)
     pass
 
 
@@ -247,29 +250,73 @@ def get_data_from_id(id_code: str) -> str:
 
 
 if __name__ == '__main__':
+    print("\nFind ID code:")
+    print(find_id_code(""))  # -> "Not enough numbers!"
+    print(find_id_code("123456789123456789"))  # -> "Too many numbers!"
+    print(find_id_code("ID code is: 49403136526"))  # -> "49403136526"
+    print(find_id_code("efs4  9   #4aw0h 3r 1a36g5j2!!6-"))  # -> "49403136526"
+
+    print("\nGender number:")
+    for i in range(9):
+        print(f"{i} {is_valid_gender_number(i)}")
+        # 0 -> False
+        # 1...6 -> True
+        # 7...8 -> False
+
+    print("\nGet gender:")
+    print(get_gender(2))  # -> "female"
+    print(get_gender(5))  # -> "male"
+
+    print("\nYear number:")
+    print(is_valid_year_number(100))  # -> False
+    print(is_valid_year_number(50))  # -> true
+
+    print("\nMonth number:")
+    print(is_valid_month_number(2))  # -> True
+    print(is_valid_month_number(15))  # -> False
+
+    print("\nBorn order number:")
+    print(is_valid_birth_number(0))  # -> False
+    print(is_valid_birth_number(1))  # -> True
+    print(is_valid_birth_number(850))  # -> True
+
+    print("\nLeap year:")
+    print(is_leap_year(1804))  # -> True
+    print(is_leap_year(1800))  # -> False
+
+    print("\nGet full year:")
+    print(get_full_year(1, 28))  # -> 1828
+    print(get_full_year(4, 85))  # -> 1985
+    print(get_full_year(5, 1))  # -> 2001
+
+    print("\nChecking where the person was born")
+    print(get_birth_place(0))  # -> "Wrong input!"
+    print(get_birth_place(1))  # -> "Kuressaare"
+    print(get_birth_place(273))  # -> "Tartu"
+    print(get_birth_place(220))  # -> "Tallinn"
 
     print("\nControl number:")
     print(is_valid_control_number("49808270244"))  # -> True
     print(is_valid_control_number("60109200187"))  # -> False, it must be 6
-    print(is_valid_control_number("37605030299"))  # -> True
     print(is_valid_control_number("39810176031"))  # -> True
 
-    # print("\nDay number:")
-    # print(is_valid_day_number(4, 5, 12, 25))  # -> True
-    # print(is_valid_day_number(3, 10, 8, 32))  # -> False
-    # print("\nFebruary check:")
-    # print(
-    # print(is_valid_day_number(4, 99, 2, 29))  # -> False (February contains 29 days only during leap year)
-    # print(is_valid_day_number(4, 8, 2, 29))  # -> True
-    # print("\nMonth contains 30 or 31 days check:")
-    # print(is_valid_day_number(4, 22, 4, 31))  # -> False (April contains max 30 days)
-    # print(is_valid_day_number(4, 18, 10, 31))  # -> True
-    # print(is_valid_day_number(4, 15, 9, 31))  # -> False (September contains max 30 days)
-    #
-    # print("\nOverall ID check::")
-    # print(is_id_valid("49808270244"))  # -> True
-    # print(is_id_valid("12345678901"))  # -> False
-    #
-    # print("\nFull message:")
-    # print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998 in Tallinn."
-    # print(get_data_from_id("60109200187"))  # -> "Given invalid ID code!"
+    print("\nDay number:")
+    print(is_valid_day_number(4, 5, 12, 25))  # -> True
+    print(is_valid_day_number(3, 10, 8, 32))  # -> False
+    print("\nFebruary check:")
+    print(
+        is_valid_day_number(4, 96, 2, 30))  # -> False (February cannot contain more than 29 days in any circumstances)
+    print(is_valid_day_number(4, 99, 2, 29))  # -> False (February contains 29 days only during leap year)
+    print(is_valid_day_number(4, 8, 2, 29))  # -> True
+    print("\nMonth contains 30 or 31 days check:")
+    print(is_valid_day_number(4, 22, 4, 31))  # -> False (April contains max 30 days)
+    print(is_valid_day_number(4, 18, 10, 31))  # -> True
+    print(is_valid_day_number(4, 15, 9, 31))  # -> False (September contains max 30 days)
+
+    print("\nOverall ID check::")
+    print(is_id_valid("49808270244"))  # -> True
+    print(is_id_valid("12345678901"))  # -> False
+
+    print("\nFull message:")
+    print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998 in Tallinn."
+    print(get_data_from_id("60109200187"))  # -> "Given invalid ID code!"
