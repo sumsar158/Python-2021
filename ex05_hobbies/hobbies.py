@@ -28,7 +28,18 @@ def create_dictionary(data: str) -> dict:
     :param data: given string from database
     :return: dictionary where keys are people and values are lists of hobbies
     """
-    pass
+    dict_hobbies = {}
+    data = data.replace("\n", " ").split(" ")
+
+    for i in data:
+        i = i.split(":")
+        if i[0] not in dict_hobbies:
+            dict_hobbies[i[0]] = []
+        if i[1] not in dict_hobbies[i[0]]:
+            dict_hobbies[i[0]].append(i[1])
+
+    print(dict_hobbies)
+    return dict_hobbies
 
 
 def create_dictionary_with_hobbies(data: str) -> dict:
