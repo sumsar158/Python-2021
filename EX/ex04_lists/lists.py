@@ -26,6 +26,7 @@ def generate_combined_list(inputs: list) -> list:
     # return result
     pass
 
+
 def generate_combined_list_unique(inputs: list) -> list:
     """
     Write a function that returns a list with the minimal possible length, that still satisfies the criteria below.
