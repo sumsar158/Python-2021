@@ -18,7 +18,7 @@ def generate_combined_list(inputs: list) -> list:
     For each element of 'inputs',
     it must be true that the returned list contains at least 'amount' of elements of type 'data_type'.
     """
-    data_types = {"int": 0, "float": 0.1, "string": "0", "list": [], "tuple": (), "dict": {}, "set": set()}
+    data_types = {"int": 0, "float": 0.1, "string": "a", "list": [], "tuple": (), "dict": {}, "set": set()}
     data_typees = {}
     result = []
 
@@ -31,9 +31,10 @@ def generate_combined_list(inputs: list) -> list:
     for k, v in data_typees.items():
         if k in data_types.keys():
             for i in range(v):
-                result.append(data_types[k] * v)
+                result.append(data_types[k])
 
     return result
+
 
 def generate_combined_list_unique(inputs: list) -> list:
     """
