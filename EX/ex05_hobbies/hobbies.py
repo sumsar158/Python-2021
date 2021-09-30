@@ -188,19 +188,14 @@ def sort_names_and_hobbies(data: str) -> tuple:
     """
     data = create_dictionary(data)
     data = sorted(data.items())
-    key_list = []
-    value_list = []
+    print(data)
     tup = ()
 
-    for k, v in data:
-        key_list.append(k)
-        value_list.append(v)
-
-    for k, v in zip(key_list, value_list):
-        v = tuple(v)
-        tup += (k, v)
+    for i in data:
+        tup += i[0], tuple(i[1])
 
     print(tup)
+
     return tup
 
 
