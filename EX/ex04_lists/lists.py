@@ -19,16 +19,16 @@ def generate_combined_list(inputs: list) -> list:
     it must be true that the returned list contains at least 'amount' of elements of type 'data_type'.
     """
     data_types = {"int": 0, "float": 0.1, "string": "a", "list": [], "tuple": (), "dict": {}, "set": set()}
-    data_typees = {}
+    data = {}
     result = []
 
     for i in inputs:
-        if i[1] not in data_typees.keys():
-            data_typees[i[1]] = i[0]
-        if i[1] in data_typees.keys() and data_typees[i[1]] < i[0]:
-            data_typees[i[1]] = i[0]
+        if i[1] not in data.keys():
+            data[i[1]] = i[0]
+        if i[1] in data.keys() and data[i[1]] < i[0]:
+            data[i[1]] = i[0]
 
-    for k, v in data_typees.items():
+    for k, v in data.items():
         if k in data_types.keys():
             for i in range(v):
                 result.append(data_types[k])
