@@ -18,13 +18,13 @@ def generate_combined_list(inputs: list) -> list:
     For each element of 'inputs',
     it must be true that the returned list contains at least 'amount' of elements of type 'data_type'.
     """
-    data_types = {"int": 0, "float": 0.1, "string": "0", "list": [], "tuple": (), "dict": {}, "set": set()}
-    result = []
-    for input in data_types.items():
-        result += generate_list(input[0], input[1])
-
-    return result
-
+    # data_types = {"int": 0, "float": 0.1, "string": "0", "list": [], "tuple": (), "dict": {}, "set": set()}
+    # result = []
+    # for input in data_types.items():
+    #     result += generate_list(input[0], input[1])
+    #
+    # return result
+    pass
 
 def generate_combined_list_unique(inputs: list) -> list:
     """

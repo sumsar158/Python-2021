@@ -44,6 +44,8 @@ def create_dictionary(data: str) -> dict:
         if i[1] not in dict_hobbies[i[0]]:
             dict_hobbies[i[0]].append(i[1])
 
+    dict_hobbies = sort_dictionary(dict_hobbies)
+
     return dict_hobbies
 
 
@@ -154,7 +156,7 @@ def find_least_popular_hobbies(data: str) -> list:
     data = create_dictionary_with_hobbies(data)
     hobbies_popularity = {}
     most_popular_hobbies = []
-    max_value = 99999
+    max_value = 999
 
     for k, v in data.items():
         v = len(v)
@@ -184,7 +186,22 @@ def sort_names_and_hobbies(data: str) -> tuple:
     and the second element is an ordered tuple of hobbies (ordered alphabetically).
     All those person-tuples are ordered by the name of the person and are inside a tuple.
     """
-    pass
+    data = create_dictionary(data)
+    data = sorted(data.items())
+    key_list = []
+    value_list = []
+    tup = ()
+
+    for k, v in data:
+        key_list.append(k)
+        value_list.append(v)
+
+    for k, v in zip(key_list, value_list):
+        v = tuple(v)
+        tup += (k, v)
+
+    print(tup)
+    return tup
 
 
 if __name__ == '__main__':
@@ -213,5 +230,3 @@ if __name__ == '__main__':
     assert sort_result[-1] == ('Wendy', ('fishing', 'fitness', 'football', 'gaming', 'photography', 'puzzles', 'shopping', 'sport', 'theatre'))
     # if you see this line below, then everything seems to be ok!
     print("sorting works!")
-
-    # print(sort_names_and_hobbies(sample_data))
