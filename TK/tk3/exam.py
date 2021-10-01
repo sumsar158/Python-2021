@@ -93,28 +93,16 @@ def mirror_ends(s: str) -> str:
     while i < int(len(s)) - 1:
         if s[i] == s[s_length]:
             mirror_string += s[i]
+
         i = i + 1
         s_length = s_length - 1
+        if s.index(s[i]) == s.index(s[s_length]):
+            break
 
     return mirror_string
 
 
 if __name__ == '__main__':
-    print(make_ends([1, 2, 3]))
-    print(make_ends([1, 2, 3, 4]))
-    print(make_ends([2]))
-
-    print(is_sum_of_two(3, 2, 1))
-    print(is_sum_of_two(3, 1, 1))
-    print(is_sum_of_two(3, 2, 5))
-
-    print(first_half('HaaHoo'))
-    print(first_half('HelloThere'))
-    print(first_half('abcdef'))
-
-    print(non_decreasing_list([0, 1, 2, 3, 98]))
-    print(non_decreasing_list([50, 49]))
-    print(non_decreasing_list([12, 12]))
 
     print(mirror_ends("abXYZba"))
     print(mirror_ends("abca"))
