@@ -86,7 +86,17 @@ def mirror_ends(s: str) -> str:
     :param s: String
     :return: Mirror image string
     """
-    pass
+    s_length = int(len(s)) - 1
+    mirror_string = ""
+    i = 0
+
+    while i < s_length - 1:
+        if s[i] == s[s_length]:
+            mirror_string += s[i]
+        i = i + 1
+        s_length = s_length - 1
+
+    return mirror_string
 
 
 if __name__ == '__main__':
@@ -105,3 +115,7 @@ if __name__ == '__main__':
     print(non_decreasing_list([0, 1, 2, 3, 98]))
     print(non_decreasing_list([50, 49]))
     print(non_decreasing_list([12, 12]))
+
+    print(mirror_ends("abXYZba"))
+    print(mirror_ends("abca"))
+    print(mirror_ends("aba"))
