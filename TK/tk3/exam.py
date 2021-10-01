@@ -15,7 +15,10 @@ def make_ends(nums: list) -> list:
     :return: List with the first and the last element from the input list.
     """
     new_nums = []
-    if len(nums) <= 2:
+    if not nums:
+        return nums
+    if len(nums) == 1:
+        nums.append(nums[0])
         return nums
     else:
         new_nums.append(nums[0])
@@ -31,7 +34,7 @@ def is_sum_of_two(a: int, b: int, c: int) -> bool:
     is_sum_of_two(3, 1, 1) => False
     is_sum_of_two(3, 2, 5) => True
     """
-    return a + b == c or b + c == a
+    return a + b == c or b + c == a or c + a == b
 
 
 def first_half(text: str) -> str:
@@ -44,7 +47,7 @@ def first_half(text: str) -> str:
     first_half('HelloThere') => 'Hello'
     first_half('abcdef') => 'abc'
     """
-    length = int(len(text)/2)
+    length = int(len(text) / 2)
     half_string = text[:length]
     return half_string
 
@@ -89,7 +92,7 @@ def mirror_ends(s: str) -> str:
 if __name__ == '__main__':
     print(make_ends([1, 2, 3]))
     print(make_ends([1, 2, 3, 4]))
-    print(make_ends([7, 4, 6, 2]))
+    print(make_ends([2]))
 
     print(is_sum_of_two(3, 2, 1))
     print(is_sum_of_two(3, 1, 1))
