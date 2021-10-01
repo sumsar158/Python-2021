@@ -90,7 +90,7 @@ def mirror_ends(s: str) -> str:
     mirror_string = ""
     i = 0
 
-    while i < s_length - 1:
+    while i < int(len(s)) - 1:
         if s[i] == s[s_length]:
             mirror_string += s[i]
         i = i + 1
