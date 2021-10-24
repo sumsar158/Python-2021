@@ -77,13 +77,8 @@ def write_contents_to_file(filename: str, contents: str) -> None:
     :param contents: Content to write to.
     :return: None
     """
-    if filename:
-        with open(filename, "a") as f:
-            f.write(contents)
-    else:
-        f = open(filename, "w")
-        with open(filename, "a") as f:
-            f.write(contents)
+    with open(filename, 'a') as f:
+        f.write(contents)
 
 
 def write_lines_to_file(filename: str, lines: list) -> None:
@@ -99,11 +94,12 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     :param lines: List of string to write to the file.
     :return: None
     """
-    with open(filename, 'a') as f:
-        for line in lines:
-            if line[-1:-2] != "\n" and line != lines[-1]:
-                line += '\n'
-            f.write(line)
+    for line in lines:
+        if line[-1:-2] != "\n" and line != lines[-1]:
+            line += '\n'
+            write_contents_to_file(filename, line)
+        else:
+            write_contents_to_file(filename, line)
 
 
 def write_csv_file(filename: str, data: list) -> None:
@@ -182,8 +178,8 @@ if __name__ == '__main__':
     print(read_file_contents('file.txt'))
     print(read_file_contents_to_list('file.txt'))
     # print(read_csv_file('data.csv'))
-    # # print(write_contents_to_file('file.txt', 'Tere maailm!\n'))
-    # print(write_lines_to_file('file.txt', ['Tere maailm!', 'Teremaailm', 'joujoujou', 'terer mail']))
+    print(write_contents_to_file('file.txt', 'Tere maailm!\n'))
+    print(write_lines_to_file('file.txt', ['Tere maailm!', 'Teremaailm', 'joujoujou', 'terer mail']))
 
 
 
