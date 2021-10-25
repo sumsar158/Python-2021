@@ -32,3 +32,7 @@ def generate_combined_list(inputs: list) -> list:
                 result.append(data_types[k])
 
     return result
+
+
+if __name__ == '__main__':
+    print(generate_list(5, 'int'))
