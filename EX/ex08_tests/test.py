@@ -44,3 +44,17 @@ def test_part1_dict_correct_len():
     res = solution.generate_list(input_amount, "dict")
     expected_len = 5
     assert len(res) == expected_len
+
+
+def test_part1_tuple_correct_len():
+    input_amount = 5
+    res = solution.generate_list(input_amount, "tuple")
+    expected_len = 5
+    assert len(res) == expected_len
+
+
+def test_part1_set_correct_len():
+    input_amount = 5
+    res = solution.generate_list(input_amount, "set")
+    expected_len = 5
+    assert len(res) == expected_len
