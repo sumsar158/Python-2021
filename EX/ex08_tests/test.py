@@ -20,6 +20,13 @@ def test_part1_input_zero():
     assert len(res) == expected_len
 
 
+def test_part1_input_hundred():
+    input_amount = 100
+    res = solution.generate_list(input_amount, "int")
+    expected_len = 100
+    assert len(res) == expected_len
+
+
 def test_part1_int_correct_content_and_len():
     input_amount = 5
     res = solution.generate_list(input_amount, "int")
