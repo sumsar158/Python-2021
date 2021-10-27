@@ -91,9 +91,9 @@ def test_part1_set_content_and_len():
 
 
 def test_part2_len_small():
-    input_amount = [(2, 'int')]
+    input_amount = [(1, 'int')]
     res = solution.generate_combined_list(input_amount)
-    expected_len = 2
+    expected_len = 1
     assert len(res) == expected_len
 
 
@@ -112,21 +112,27 @@ def test_part2_len_big():
 
 
 def test_part2_len_float():
-    input_amount = [(2, 'float')]
+    input_amount = [(5, 'float')]
     res = solution.generate_combined_list(input_amount)
-    expected_len = 2
+    expected_len = 5
     assert len(res) == expected_len
+    for element in res:
+        assert isinstance(element, float)
 
 
 def test_part2_len_string():
-    input_amount = [(2, 'string')]
+    input_amount = [(5, 'string')]
     res = solution.generate_combined_list(input_amount)
-    expected_len = 2
+    expected_len = 5
     assert len(res) == expected_len
+    for element in res:
+        assert isinstance(element, str)
 
 
 def test_part2_len_list():
-    input_amount = [(2, 'list')]
+    input_amount = [(5, 'list')]
     res = solution.generate_combined_list(input_amount)
-    expected_len = 2
+    expected_len = 5
     assert len(res) == expected_len
+    for element in res:
+        assert isinstance(element, list)
