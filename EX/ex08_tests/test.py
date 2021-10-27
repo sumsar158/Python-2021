@@ -200,7 +200,7 @@ def test_part3_len_str():
 
 
 def test_part3_len_small():
-    """Test function length with small integer."""
+    """Test function3 length with small integer."""
     input_amount = [(1, 'int')]
     res = solution.generate_combined_list_unique(input_amount)
     expected_len = 1
@@ -208,7 +208,7 @@ def test_part3_len_small():
 
 
 def test_part3_len_zero():
-    """Test function length with input 0."""
+    """Test function3 length with input 0."""
     input_amount = [(0, 'int')]
     res = solution.generate_combined_list_unique(input_amount)
     expected_len = 0
@@ -216,7 +216,7 @@ def test_part3_len_zero():
 
 
 def test_part3_len_big():
-    """Test function length with big integer."""
+    """Test function3 length with big integer."""
     input_amount = [(100, 'int')]
     res = solution.generate_combined_list_unique(input_amount)
     expected_len = 100
