@@ -14,6 +14,7 @@ import solution
 #
 
 def test_part1_input_zero():
+    """Test function with input 0."""
     input_amount = 0
     res = solution.generate_list(input_amount, "int")
     expected_len = 0
@@ -21,6 +22,7 @@ def test_part1_input_zero():
 
 
 def test_part1_input_hundred():
+    """Test function with input 100."""
     input_amount = 100
     res = solution.generate_list(input_amount, "int")
     expected_len = 100
@@ -28,6 +30,7 @@ def test_part1_input_hundred():
 
 
 def test_part1_int_correct_content_and_len():
+    """Test function with input integer and correct length."""
     input_amount = 5
     res = solution.generate_list(input_amount, "int")
     expected_len = 5
@@ -37,6 +40,7 @@ def test_part1_int_correct_content_and_len():
 
 
 def test_part1_float_content_and_len():
+    """Test function with input float and correct length."""
     input_amount = 5
     res = solution.generate_list(input_amount, "float")
     expected_len = 5
@@ -46,6 +50,7 @@ def test_part1_float_content_and_len():
 
 
 def test_part1_string_content_and_len():
+    """Test function with input string and correct length."""
     input_amount = 5
     res = solution.generate_list(input_amount, "string")
     expected_len = 5
@@ -55,6 +60,7 @@ def test_part1_string_content_and_len():
 
 
 def test_part1_list_content_and_len():
+    """Test function with input list and correct length."""
     input_amount = 5
     res = solution.generate_list(input_amount, "list")
     expected_len = 5
@@ -64,6 +70,7 @@ def test_part1_list_content_and_len():
 
 
 def test_part1_dict_content_and_len():
+    """Test function with input dictionary and correct length."""
     input_amount = 5
     res = solution.generate_list(input_amount, "dict")
     expected_len = 5
@@ -73,6 +80,7 @@ def test_part1_dict_content_and_len():
 
 
 def test_part1_tuple_content_and_len():
+    """Test function with input tuple and correct length."""
     input_amount = 5
     res = solution.generate_list(input_amount, "tuple")
     expected_len = 5
@@ -82,6 +90,7 @@ def test_part1_tuple_content_and_len():
 
 
 def test_part1_set_content_and_len():
+    """Test function with input set and correct length."""
     input_amount = 5
     res = solution.generate_list(input_amount, "set")
     expected_len = 5
@@ -91,6 +100,7 @@ def test_part1_set_content_and_len():
 
 
 def test_part2_len_small():
+    """Test function with small integer."""
     input_amount = [(1, 'int')]
     res = solution.generate_combined_list(input_amount)
     expected_len = 1
@@ -98,6 +108,7 @@ def test_part2_len_small():
 
 
 def test_part2_len_zero():
+    """Test function with input 0."""
     input_amount = [(0, 'int')]
     res = solution.generate_combined_list(input_amount)
     expected_len = 0
@@ -105,6 +116,7 @@ def test_part2_len_zero():
 
 
 def test_part2_len_big():
+    """Test function with big integer."""
     input_amount = [(100, 'int')]
     res = solution.generate_combined_list(input_amount)
     expected_len = 100
@@ -112,6 +124,7 @@ def test_part2_len_big():
 
 
 def test_part2_len_float():
+    """Test function2 with input float and correct length."""
     input_amount = [(5, 'float')]
     res = solution.generate_combined_list(input_amount)
     expected_len = 5
@@ -121,6 +134,7 @@ def test_part2_len_float():
 
 
 def test_part2_len_string():
+    """Test function2 with input string and correct length."""
     input_amount = [(5, 'string')]
     res = solution.generate_combined_list(input_amount)
     expected_len = 5
@@ -130,6 +144,7 @@ def test_part2_len_string():
 
 
 def test_part2_len_list():
+    """Test function2 with input list and correct length."""
     input_amount = [(5, 'list')]
     res = solution.generate_combined_list(input_amount)
     expected_len = 5
