@@ -167,27 +167,3 @@ def test_part3_len_int():
             list_of_integers_in_list.append(element)
         if element in list_of_integers_in_list:
             assert "fount duplicate integers"
-
-
-def test_part3_len_small():
-    """Test function3 length with small integer."""
-    input_amount = [(1, 'int')]
-    res = solution.generate_combined_list_unique(input_amount)
-    expected_len = 1
-    assert len(res) == expected_len
-
-
-def test_part3_len_zero():
-    """Test function3 length with input 0."""
-    input_amount = [(0, 'str')]
-    res = solution.generate_combined_list_unique(input_amount)
-    expected_len = 0
-    assert len(res) == expected_len
-
-
-def test_part3_len_big():
-    """Test function3 length with big integer."""
-    input_amount = [(100, 'float')]
-    res = solution.generate_combined_list_unique(input_amount)
-    expected_len = 100
-    assert len(res) == expected_len
