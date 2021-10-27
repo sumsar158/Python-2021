@@ -88,3 +88,23 @@ def test_part1_set_content_and_len():
     assert len(res) == expected_len
     for element in res:
         assert isinstance(element, set)
+
+
+def test_part2_len_small():
+    input_amount = [(2, 'int')]
+    res = solution.generate_combined_list(input_amount)
+    expected_len = 2
+    assert len(res) == expected_len
+
+
+def test_part2_len_zero():
+    input_amount = [(0, 'int')]
+    res = solution.generate_combined_list(input_amount)
+    expected_len = 0
+    assert len(res) == expected_len
+
+def test_part2_len_big():
+    input_amount = [(100, 'int')]
+    res = solution.generate_combined_list(input_amount)
+    expected_len = 100
+    assert len(res) == expected_len
