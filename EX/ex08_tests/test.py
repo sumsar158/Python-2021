@@ -103,8 +103,30 @@ def test_part2_len_zero():
     expected_len = 0
     assert len(res) == expected_len
 
+
 def test_part2_len_big():
     input_amount = [(100, 'int')]
     res = solution.generate_combined_list(input_amount)
     expected_len = 100
+    assert len(res) == expected_len
+
+
+def test_part2_len_float():
+    input_amount = [(2, 'float')]
+    res = solution.generate_combined_list(input_amount)
+    expected_len = 2
+    assert len(res) == expected_len
+
+
+def test_part2_len_string():
+    input_amount = [(2, 'string')]
+    res = solution.generate_combined_list(input_amount)
+    expected_len = 2
+    assert len(res) == expected_len
+
+
+def test_part2_len_list():
+    input_amount = [(2, 'list')]
+    res = solution.generate_combined_list(input_amount)
+    expected_len = 2
     assert len(res) == expected_len
