@@ -1,8 +1,8 @@
+"""Testing ex4."""
 import pytest
 import solution
-
-
 # def test_data_types():
+#     """Test function1 with all data type inputs and correct length."""
 #     data_types = {"int": int, "float": float, "string": str, "list": list, "tuple": tuple, "dict": dict, "set": set}
 #     input_amount = 5
 #     expected_len = 5
@@ -12,6 +12,7 @@ import solution
 #         for element in res:
 #             assert isinstance(element, value)
 #
+
 
 def test_part1_input_zero():
     """Test function with input 0."""
