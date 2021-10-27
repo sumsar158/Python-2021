@@ -152,3 +152,18 @@ def test_part2_len_list():
     assert len(res) == expected_len
     for element in res:
         assert isinstance(element, list)
+
+
+def test_part3_len_int():
+    """Test function3 with input of unique integers and correct length."""
+    input_amount = [(5, 'int')]
+    list_of_elements_in_list = []
+    res = solution. generate_combined_list_unique(input_amount)
+    expected_len = 5
+    assert len(res) == expected_len
+    for element in res:
+        assert isinstance(element, int)
+        if element not in list_of_elements_in_list:
+            list_of_elements_in_list.append(element)
+        if element in list_of_elements_in_list:
+            assert "fount duplicate element"
