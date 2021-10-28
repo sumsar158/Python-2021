@@ -5,11 +5,13 @@ def students_study(time: int, coffee_needed: bool) -> bool:
     (19, False) -> True
     (1, True) -> False.
     """
+    studying = False
+
     if time in range(18, 25):
         studying = True
     if time in range(5, 18) and coffee_needed:
         studying = True
-    if time in range(5, 18) and coffee_needed:
+    if time in range(5, 18) and coffee_needed == False:
         studying = False
     if time in range(1, 5):
         studying = False
