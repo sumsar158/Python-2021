@@ -7,8 +7,10 @@ def students_study(time: int, coffee_needed: bool) -> bool:
     """
     if time in range(18, 25):
         studying = True
-    if time in range(5, 18):
+    if time in range(5, 18) and coffee_needed == True:
         studying = True
+    else:
+        studying = False
     if time in range(1, 5):
         studying = False
 
@@ -38,3 +40,4 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
 
 if __name__ == '__main__':
     print(students_study(1, True))
+    print(students_study(19, False))
