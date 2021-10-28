@@ -1,6 +1,6 @@
 """Testing solutions part 2."""
 import pytest
-from solution import students_study
+from solution import students_study, lottery
 
 
 def test_part1_must_sleep_min_without_coffee():
@@ -61,3 +61,67 @@ def test_part1_not_studying_day_without_coffee():
         res = students_study(t, coffee_needed)
     studying = False
     assert studying == res
+
+
+def test_part2_all_numbers_5():
+    """Winnings must be 10 with all numbers being 5."""
+    a, b, c = 5, 5, 5
+    winnings = 10
+    res = lottery(a, b, c)
+    assert res == winnings
+
+
+def test_part2_all_numbers_equal_positive():
+    """Winnings must be 5 with all numbers being same positive integers."""
+    a, b, c = 8, 8, 8
+    winnings = 5
+    res = lottery(a, b, c)
+    assert res == winnings
+
+
+def test_part2_all_numbers_equal_negative():
+    """Winnings must be 5 with all numbers being same negative integers."""
+    a, b, c = -2, -2, -2
+    winnings = 5
+    res = lottery(a, b, c)
+    assert res == winnings
+
+
+def test_part2_all_numbers_zero():
+    """Winnings must be 5 with all numbers being zero."""
+    a, b, c = 0, 0, 0
+    winnings = 5
+    res = lottery(a, b, c)
+    assert res == winnings
+
+
+def test_part2_a_b_same_c_different():
+    """Winnings must be 0 with a and b being same and c different."""
+    a, b, c = 3, 3, 7
+    winnings = 0
+    res = lottery(a, b, c)
+    assert res == winnings
+
+
+def test_part2_a_c_same_b_different():
+    """Winnings must be 0 with a and c being same and b different."""
+    a, b, c = 4, 9, 4
+    winnings = 0
+    res = lottery(a, b, c)
+    assert res == winnings
+
+
+def test_part2_b_c_are_not_a():
+    """Winnings must be 1 with b and c being different from a."""
+    a, b, c = 4, 5, 2
+    winnings = 1
+    res = lottery(a, b, c)
+    assert res == winnings
+
+
+def test_part2_all_numbers_different():
+    """Winnings must be 0 while all numbers different."""
+    a, b, c = 2, 7, 9
+    winnings = 0
+    res = lottery(a, b, c)
+    assert res == winnings

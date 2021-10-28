@@ -38,7 +38,8 @@ def lottery(a: int, b: int, c: int) -> int:
         winnings = 5
     if b != a and c != a:
         winnings = 1
-
+    if c == a and b != a or b == a and c != a:
+        winnings = 0
     return winnings
 
 
@@ -55,3 +56,39 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
 if __name__ == '__main__':
     print(students_study(1, True))
     print(students_study(19, False))
+
+
+"""
+test_solve_test[lottery__all_same_positive]
+AssertionError: assert ( == 0) == False	
+FAILED
+
+84	2
+test_solve_test[lottery__all_same_negative]
+AssertionError: assert ( == 0) == False	
+FAILED
+
+81	2
+test_solve_test[lottery__all_same_zero]
+AssertionError: assert ( == 0) == False	
+FAILED
+
+81	2
+test_solve_test[lottery__a_b_same_c_diff]
+AssertionError: assert ( == 0) == False	
+FAILED
+
+80	2
+test_solve_test[lottery__a_c_same_b_diff]
+AssertionError: assert ( == 0) == False	
+FAILED
+
+80	2
+test_solve_test[lottery__b_c_same_a_diff]
+AssertionError: assert ( == 0) == False	
+FAILED
+
+136	2
+test_solve_test[lottery__all_diff]
+AssertionError: assert ( == 0) == False
+"""
