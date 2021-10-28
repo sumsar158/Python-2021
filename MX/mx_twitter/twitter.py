@@ -17,8 +17,10 @@ class Tweet:
         self.content = content
         self.time = time
         self.retweets = retweets
-        self.ratio = retweets / time
-        self.popularity_index = time / retweets
+        if time != 0:
+            self.ratio = retweets / time
+        if retweets != 0:
+            self.popularity_index = time / retweets
 
 
 def find_fastest_growing(tweets: list) -> Tweet:
@@ -115,4 +117,3 @@ if __name__ == '__main__':
     filtered_by_hashtag = filter_by_hashtag(tweets, "#bigsmart")
     print(filtered_by_hashtag[0].user)  # -> "@realDonaldTrump"
     print(filtered_by_hashtag[1].user)  # -> "@elonMusk"
-
