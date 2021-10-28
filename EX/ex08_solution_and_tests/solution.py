@@ -9,6 +9,8 @@ def students_study(time: int, coffee_needed: bool) -> bool:
         coffee_needed = False
     if time in range(5, 18):
         coffee_needed = True
+    if time in range(1, 5):
+        coffee_needed = False
 
     return coffee_needed
 
