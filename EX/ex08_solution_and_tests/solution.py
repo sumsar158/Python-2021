@@ -1,3 +1,6 @@
+"""EX08 - Testimine (2)."""
+
+
 def students_study(time: int, coffee_needed: bool) -> bool:
     """
     Return True if students study in given circumstances.
@@ -11,7 +14,7 @@ def students_study(time: int, coffee_needed: bool) -> bool:
         studying = True
     if time in range(5, 18) and coffee_needed:
         studying = True
-    if time in range(5, 18) and coffee_needed == False:
+    if time in range(5, 18) and coffee_needed is False:
         studying = False
     if time in range(1, 5):
         studying = False
@@ -27,7 +30,16 @@ def lottery(a: int, b: int, c: int) -> int:
     (2, 2, 1) -> 0
     (2, 3, 1) -> 1
     """
-    pass
+    winnings = 0
+
+    if a == 5 and b == a and c == b:
+        winnings = 10
+    if a == b and b == c and c != 5:
+        winnings = 5
+    if b != a and c != a:
+        winnings = 1
+
+    return winnings
 
 
 def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> int:
