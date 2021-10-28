@@ -30,17 +30,14 @@ def lottery(a: int, b: int, c: int) -> int:
     (2, 2, 1) -> 0
     (2, 3, 1) -> 1
     """
-    winnings = 0
-
     if a == 5 and b == a and c == b:
-        winnings = 10
+        return 10
     if a == b and b == c and c != 5:
-        winnings = 5
-    if b != a and c != a:
-        winnings = 1
-    if c == a and b != a or b == a and c != a:
-        winnings = 0
-    return winnings
+        return 5
+    if b != a and c != a and a != b:
+        return 1
+    if c == a or b == a:
+        return 0
 
 
 def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> int:
@@ -54,8 +51,9 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
 
 
 if __name__ == '__main__':
-    print(students_study(1, True))
-    print(students_study(19, False))
+    print(lottery(2, 7, 9))
+    print(lottery(2, 2, 1))
+    print(lottery(5, 5, 5))
 
 
 """

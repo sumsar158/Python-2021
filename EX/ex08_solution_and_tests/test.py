@@ -122,6 +122,6 @@ def test_part2_b_c_are_not_a():
 def test_part2_all_numbers_different():
     """Winnings must be 0 while all numbers different."""
     a, b, c = 2, 7, 9
-    winnings = 0
+    winnings = 1
     res = lottery(a, b, c)
     assert res == winnings
