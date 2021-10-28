@@ -19,8 +19,12 @@ class Tweet:
         self.retweets = retweets
         if time != 0:
             self.ratio = retweets / time
+        else:
+            self.ratio = 0
         if retweets != 0:
             self.popularity_index = time / retweets
+        else:
+            self.popularity_index = 0
 
 
 def find_fastest_growing(tweets: list) -> Tweet:
