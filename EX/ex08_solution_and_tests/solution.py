@@ -47,46 +47,15 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
     (4, 1, 9) -> 4
     (3, 1, 10) -> -1
     """
-    pass
+    if small_baskets + big_baskets * 5 < ordered_amount:
+        return -1
+    if ordered_amount % big_baskets * 5 <= 0:
+        return small_baskets
+    if (ordered_amount % big_baskets * 5) % big_baskets <= 0:
+        return small_baskets - (ordered_amount % big_baskets * 5)
 
 
 if __name__ == '__main__':
-    print(lottery(2, 7, 9))
-    print(lottery(2, 2, 1))
-    print(lottery(5, 5, 5))
-
-
-"""
-test_solve_test[lottery__all_same_positive]
-AssertionError: assert ( == 0) == False	
-FAILED
-
-84	2
-test_solve_test[lottery__all_same_negative]
-AssertionError: assert ( == 0) == False	
-FAILED
-
-81	2
-test_solve_test[lottery__all_same_zero]
-AssertionError: assert ( == 0) == False	
-FAILED
-
-81	2
-test_solve_test[lottery__a_b_same_c_diff]
-AssertionError: assert ( == 0) == False	
-FAILED
-
-80	2
-test_solve_test[lottery__a_c_same_b_diff]
-AssertionError: assert ( == 0) == False	
-FAILED
-
-80	2
-test_solve_test[lottery__b_c_same_a_diff]
-AssertionError: assert ( == 0) == False	
-FAILED
-
-136	2
-test_solve_test[lottery__all_diff]
-AssertionError: assert ( == 0) == False
-"""
+    print(fruit_order(4, 1, 9))
+    print(fruit_order(3, 1, 10))
+    print(fruit_order(7, 1, 7))
