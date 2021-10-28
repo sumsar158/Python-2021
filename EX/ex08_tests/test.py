@@ -169,10 +169,3 @@ def test_part3_len_int():
             assert "fount duplicate integers"
 
 
-def test_part3_len_str():
-    """Test function3 with input of unique strings and correct length."""
-    input_amount = [(5, 'str')]
-    list_of_strings_in_list = []
-    res = solution. generate_combined_list_unique(input_amount)
-    expected_len = 5
-    assert len(res) == expected_len

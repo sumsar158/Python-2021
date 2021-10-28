@@ -67,7 +67,7 @@ if __name__ == '__main__':
     # for example for (3, 'string') in the first part an output of ["kass", "koer", "kana"] would also work.
 
     # # Part 1
-    # print(generate_list(2, 'set'))  # [set(), set()]
+    print(generate_list(2, 'set'))  # [set(), set()]
     # print(generate_list(3, 'string'))  # ["a", "kass", "a"]
     # print(generate_list(1, 'list'))  # [[]]
     # print(generate_list(5, 'int'))  # [1, 2, 3, 3, 3]

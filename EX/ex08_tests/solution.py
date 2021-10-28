@@ -36,3 +36,7 @@ def generate_combined_list(inputs: list) -> list:
 
 if __name__ == '__main__':
     print(generate_list(5, 'int'))
+
+
+def generate_combined_list_unique(input_amount):
+    return []
