@@ -5,14 +5,14 @@ def students_study(time: int, coffee_needed: bool) -> bool:
     (19, False) -> True
     (1, True) -> False.
     """
-    if time in range(18, 25) or range(1, 5):
-        coffee_needed = False
+    if time in range(18, 25):
+        studying = True
     if time in range(5, 18):
-        coffee_needed = True
+        studying = True
     if time in range(1, 5):
-        coffee_needed = False
+        studying = False
 
-    return coffee_needed
+    return studying
 
 
 def lottery(a: int, b: int, c: int) -> int:
@@ -37,5 +37,4 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
 
 
 if __name__ == '__main__':
-    for i in range(2, 6):
-        print(i)
+    print(students_study(1, True))
