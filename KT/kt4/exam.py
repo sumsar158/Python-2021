@@ -30,7 +30,6 @@ def sum_elements_around_last_three(nums: list) -> int:
     Note if 3 is last element in the list you must return
     sum of elements before and after 3 which is before last.
 
-
     sum_before_and_after_last_three([1, 3, 7]) -> 8
     sum_before_and_after_last_three([1, 2, 3, 4, 6, 4, 3, 4, 5, 3, 4, 5, 6]) -> 9
     sum_before_and_after_last_three([1, 2, 3, 4, 6, 4, 3, 4, 5, 3, 3, 2, 3]) -> 5
