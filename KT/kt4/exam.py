@@ -72,12 +72,12 @@ def max_block(s: str) -> int:
     if s == temp_string:
         return 0
 
-    for c in s:
-        if c == temp_string:
+    for letter in s:
+        if letter == temp_string:
             count += 1
         else:
             count = 1
-            temp_string = c
+            temp_string = letter
         len_longest_string = max(count, len_longest_string)
 
     return len_longest_string
