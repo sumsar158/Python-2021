@@ -44,13 +44,14 @@ def sum_elements_around_last_three(nums: list) -> int:
         return 0
     nums.reverse()
     for num in nums:
-        if num == 3 and nums.index(num) == 0:
-            continue
-        else:
+        if num == 3 and nums.index(num) != 0:
+            print(nums.index(num))
             number_3_index = nums.index(num)
-            print(nums[number_3_index - 1])
-            print(nums[number_3_index + 1])
+            print(nums[1])
+            print(number_3_index - 1)
             return nums[number_3_index - 1] + nums[number_3_index + 1]
+        else:
+            continue
     return 0
 
 
@@ -64,7 +65,22 @@ def max_block(s: str) -> int:
     max_block("abbCCCddBBBxx") => 3
     max_block("") => 0
     """
-    pass
+    temp_string = ""
+    count = 0
+    len_longest_string = 0
+
+    if s == temp_string:
+        return 0
+
+    for c in s:
+        if c == temp_string:
+            count += 1
+        else:
+            count = 1
+            temp_string = c
+        len_longest_string = max(count, len_longest_string)
+
+    return len_longest_string
 
 
 def create_dictionary_from_directed_string_pairs(pairs: list) -> dict:
@@ -100,8 +116,6 @@ def create_dictionary_from_directed_string_pairs(pairs: list) -> dict:
 
 
 if __name__ == '__main__':
-    print(two_digits_into_list(71))
-    # print(sum_elements_around_last_three([1, 3, 7]))
-    # print(sum_elements_around_last_three([1, 2, 3, 4, 6, 4, 3, 4, 5, 3, 4, 5, 6]))
-    print(sum_elements_around_last_three([1, 2, 3, 4, 6, 4, 3, 4, 5, 3, 3, 2, 3]))
-    # print(sum_elements_around_last_three([1, 2, 3]))
+    print(max_block("hoopla"))
+    print(max_block("abbCCCddBBBxx"))
+    print(max_block(""))
