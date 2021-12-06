@@ -1,5 +1,6 @@
 """Hobbies but OOP."""
 
+
 class Person:
     """
     Class for people.
@@ -76,12 +77,13 @@ def sort_by_least_hobbies(people_list: list) -> list:
     :param people_list: list of people to sort.
     :return: sorted list of people.
     """
-    return sorted(people_list, key=lambda x: x.hobbies)
+    return sorted(people_list, key=lambda x: (x.hobbies, x.full_name))
 
 
 def sort_people_and_hobbies(people_list: list) -> list:
     """
     Return a list of people but sorted alphabetically by their full name.
+
     Also sort their list of hobbies alphabetically.
 
     :param people_list: list of people to sort.
