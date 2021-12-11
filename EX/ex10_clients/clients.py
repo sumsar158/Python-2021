@@ -96,7 +96,14 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     :param filename: name of file to get info from.
     :return: client with largest earnings.
     """
-    list_of_earners = read_from_file_into_list(filename)
+    list_of_clients = read_from_file_into_list(filename)
+    list_of_earners = []
+
+    for client in list_of_clients:
+        if client.current_amount > client.starting_amount:
+            list_of_earners.append(client)
+    if not list_of_earners:
+        return None
 
     list_of_earners = sorted(list_of_earners, key=lambda client: client.daily_earnings, reverse=True)
     list_of_earners = sorted(list_of_earners, key=lambda client: client.account_age)
@@ -113,9 +120,17 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     :param filename: name of file to get info from.
     :return: client with largest loss.
     """
-    list_of_earners = read_from_file_into_list(filename)
+    list_of_clients = read_from_file_into_list(filename)
+    list_of_earners = []
+
+    for client in list_of_clients:
+        if client.current_amount < client.starting_amount:
+            list_of_earners.append(client)
+    if not list_of_earners:
+        return None
 
     list_of_earners = sorted(list_of_earners, key=lambda client: client.daily_earnings)
+    list_of_earners = sorted(list_of_earners, key=lambda client: client.account_age)
 
     return list_of_earners[0]
 
