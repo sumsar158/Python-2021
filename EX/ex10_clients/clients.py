@@ -121,18 +121,18 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     :return: client with largest loss.
     """
     list_of_clients = read_from_file_into_list(filename)
-    list_of_earners = []
+    list_of_losers = []
 
     for client in list_of_clients:
         if client.current_amount < client.starting_amount:
-            list_of_earners.append(client)
-    if not list_of_earners:
+            list_of_losers.append(client)
+    if not list_of_losers:
         return None
 
-    list_of_earners = sorted(list_of_earners, key=lambda client: client.daily_earnings)
-    list_of_earners = sorted(list_of_earners, key=lambda client: client.account_age)
+    list_of_losers = sorted(list_of_losers, key=lambda client: client.daily_earnings)
+    list_of_losers = sorted(list_of_losers, key=lambda client: client.account_age)
 
-    return list_of_earners[0]
+    return list_of_losers[0]
 
 
 if __name__ == '__main__':
