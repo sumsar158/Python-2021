@@ -64,7 +64,8 @@ def read_from_file_into_list(filename: str) -> list:
 
     for line in lines:
         line = line.split(',')
-        new_client = Client(name=line[0], bank=line[1], account_age=int(line[2]), starting_amount=int(line[3]), current_amount=int(line[4]))
+        new_client = Client(name=line[0], bank=line[1], account_age=int(line[2]), starting_amount=int(line[3]),
+                            current_amount=int(line[4]))
         clients_list.append(new_client)
 
     return clients_list
@@ -107,8 +108,8 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
 
     list_of_earners = sorted(list_of_earners, key=lambda client: client.daily_earnings, reverse=True)
     list_of_earners = sorted(list_of_earners, key=lambda client: client.account_age)
-
-    return list_of_earners[0]
+    top_earner = list_of_earners[0].name
+    return top_earner
 
 
 def largest_loss_per_day(filename: str) -> Optional[Client]:
