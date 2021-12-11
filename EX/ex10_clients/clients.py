@@ -128,7 +128,7 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     if not list_of_losers:
         return None
 
-    return min(list_of_losers, key=lambda s: (s.daily_earnings, -s.account_age))
+    return min(list_of_losers, key=lambda s: (s.daily_earnings, s.account_age))
 
 
 if __name__ == '__main__':
