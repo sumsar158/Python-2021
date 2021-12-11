@@ -125,7 +125,7 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     list_of_losers = []
 
     for client in list_of_clients:
-        if client.current_amount < client.starting_amount:
+        if client.starting_amount >= client.current_amount:
             list_of_losers.append(client)
     if not list_of_losers:
         return None
