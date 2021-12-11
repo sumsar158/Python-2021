@@ -107,10 +107,7 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     if not list_of_earners:
         return None
 
-    list_of_earners = sorted(list_of_earners, key=lambda clients: (clients.daily_earnings, clients.account_age),
-                             reverse=True)
-    list_of_earners = sorted(list_of_earners, key=lambda clients: clients.account_age)
-    top_earner = list_of_earners[0]
+    top_earner = max(list_of_earners, key=lambda s: s.daily_earnings)
 
     return top_earner
 
@@ -133,10 +130,9 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     if not list_of_losers:
         return None
 
-    list_of_losers = sorted(list_of_losers, key=lambda client: client.daily_earnings)
-    list_of_losers = sorted(list_of_losers, key=lambda client: client.account_age)
+    top_loser = min(list_of_losers, key=lambda s: s.daily_earnings)
 
-    return list_of_losers[0]
+    return top_loser
 
 
 if __name__ == '__main__':
