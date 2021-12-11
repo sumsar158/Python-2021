@@ -34,13 +34,14 @@ class Client:
     def __repr__(self):
         """
         Client representation.
+
         :return: clients name
         """
         return self.name
 
     def earnings_per_day(self):
         """
-        Clients earnings per day since the start.
+        Client earnings per day since the start.
 
         You can either calculate the value or
         save it into a new attribute and return the value.
@@ -108,7 +109,7 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
 
     list_of_earners = sorted(list_of_earners, key=lambda client: client.daily_earnings, reverse=True)
     list_of_earners = sorted(list_of_earners, key=lambda client: client.account_age)
-    top_earner = list_of_earners[0].name
+    top_earner = list_of_earners[0]
     return top_earner
 
 
