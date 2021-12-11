@@ -107,9 +107,11 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     if not list_of_earners:
         return None
 
-    list_of_earners = sorted(list_of_earners, key=lambda client: client.daily_earnings, reverse=True)
-    list_of_earners = sorted(list_of_earners, key=lambda client: client.account_age)
+    list_of_earners = sorted(list_of_earners, key=lambda clients: (clients.daily_earnings, clients.account_age),
+                             reverse=True)
+    list_of_earners = sorted(list_of_earners, key=lambda clients: clients.account_age)
     top_earner = list_of_earners[0]
+
     return top_earner
 
 
