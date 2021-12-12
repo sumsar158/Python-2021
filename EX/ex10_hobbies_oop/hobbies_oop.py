@@ -1,7 +1,5 @@
 """Hobbies but OOP."""
 
-from operator import attrgetter
-
 
 class Person:
     """
