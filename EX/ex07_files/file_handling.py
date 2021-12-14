@@ -71,7 +71,7 @@ def write_contents_to_file(filename: str, contents: str) -> None:
     """
     Write contents to file.
 
-    If the file does not exists, create it.
+    If the file does not exist s, create it.
 
     :param filename: File to write to.
     :param contents: Content to write to.
