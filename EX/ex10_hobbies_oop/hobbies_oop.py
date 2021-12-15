@@ -1,7 +1,5 @@
 """Hobbies but OOP."""
 
-from operator import attrgetter
-
 
 class Person:
     """
@@ -67,7 +65,7 @@ def sort_by_most_hobbies(people_list: list) -> list:
     :param people_list: list of people to sort.
     :return: sorted list of people.
     """
-    return sorted(people_list, key=lambda person: (person.hobbies_len, person.full_name), reverse=True)
+    return sorted(people_list, key=lambda s: (-s.hobbies_len, s.full_name))
 
 
 def sort_by_least_hobbies(people_list: list) -> list:
@@ -80,7 +78,7 @@ def sort_by_least_hobbies(people_list: list) -> list:
     :param people_list: list of people to sort.
     :return: sorted list of people.
     """
-    return sorted(people_list, key=lambda person: (person.hobbies_len, person.full_name))
+    return sorted(people_list, key=lambda s: (s.hobbies_len, s.full_name))
 
 
 def sort_people_and_hobbies(people_list: list) -> list:
@@ -94,7 +92,7 @@ def sort_people_and_hobbies(people_list: list) -> list:
     """
     for person in people_list:
         person.hobbies = sorted(person.hobbies)
-    return sorted(people_list, key=lambda person: person.full_name)
+    return sorted(people_list, key=lambda s: s.full_name)
 
 
 if __name__ == '__main__':
