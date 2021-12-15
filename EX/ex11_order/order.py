@@ -117,11 +117,12 @@ class OrderAggregator:
         :return: Order.
         """
         items = []
-
         for order in self.order_items:
-            if order.customer == customer and order.total_volume <= max_volume:
+            remaining_volume = max_volume
+            if order.customer == customer and order.total_volume <= remaining_volume:
                 items.append(order)
-            if order.customer == customer and order.total_volume > max_volume:
+                remaining_volume -= order.total_volume
+            if order.customer == customer and order.total_volume * max_items_quantity > remaining_volume:
                 self.order_items.remove(order)
 
         return Order(items)
