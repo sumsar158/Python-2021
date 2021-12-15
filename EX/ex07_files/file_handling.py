@@ -126,7 +126,10 @@ def write_csv_file(filename: str, data: list) -> None:
     :param data: List of lists to write to the file.
     :return: None
     """
-    pass
+    with open(filename, 'w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file, delimiter=",")
+        for row in data:
+            csv_writer.writerow(row)
 
 
 def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv_output_filename: str) -> None:
@@ -180,11 +183,11 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
 if __name__ == '__main__':
     print(read_file_contents('file.txt'))
     print(read_file_contents_to_list('file.txt'))
-    # print(read_csv_file('data.csv'))
+    print(read_csv_file('data.csv'))
     print(write_contents_to_file('file.txt', 'Tere maailmm!\n'))
     print(write_contents_to_file('file.txt', 'hello worldh...\nworld\nstop'))
-    # print(write_lines_to_file('file.txt', ['Tere maailm!', 'Teremaailm', 'joujoujou', 'terer mail']))
-
+    print(write_lines_to_file('file.txt', ['Tere maailm!', 'Teremaailm', 'joujoujou', 'terer mail']))
+    write_csv_file(filename='data.csv', data=[["name", "age"], ["john", "11"], ["mary", "15"]])
 
 
 
