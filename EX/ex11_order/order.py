@@ -121,7 +121,7 @@ class OrderAggregator:
         for order in self.order_items:
             if order.customer == customer and order.total_volume <= max_volume:
                 items.append(order)
-            else:
+            if order.customer == customer and order.total_volume > max_volume:
                 self.order_items.remove(order)
 
         return Order(items)
