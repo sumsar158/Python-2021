@@ -101,7 +101,7 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     :return: None
     """
     text = ""
-    text = ",".join(lines)
+    text = ",".join(lines).strip() + '\n'
     write_contents_to_file(filename, text)
 
 
