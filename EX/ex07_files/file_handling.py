@@ -10,9 +10,11 @@ def read_file_contents(filename: str) -> str:
     :return: File contents as string.
     """
     lines = ""
+
     with open(filename) as f:
         for line in f:
             lines += line
+
     return lines
 
 
@@ -30,9 +32,11 @@ def read_file_contents_to_list(filename: str) -> list:
     :return: List of lines.
     """
     lines = []
+
     with open(filename) as f:
         for line in f:
             lines.append(line.strip())
+
     return lines
 
 
@@ -60,10 +64,12 @@ def read_csv_file(filename: str) -> list:
     :return: List of lists.
     """
     lists = []
+
     with open(filename) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             lists.append(row)
+
     return lists
 
 
@@ -77,8 +83,10 @@ def write_contents_to_file(filename: str, contents: str) -> None:
     :param contents: Content to write to.
     :return: None
     """
+    content = "" + contents
+
     with open(filename, 'a') as f:
-        f.write(contents)
+        f.write(content)
 
 
 def write_lines_to_file(filename: str, lines: list) -> None:
@@ -178,8 +186,8 @@ if __name__ == '__main__':
     print(read_file_contents('file.txt'))
     print(read_file_contents_to_list('file.txt'))
     # print(read_csv_file('data.csv'))
-    print(write_contents_to_file('file.txt', 'Tere maailm!\n'))
-    print(write_lines_to_file('file.txt', ['Tere maailm!', 'Teremaailm', 'joujoujou', 'terer mail']))
+    print(write_contents_to_file('file.txt', 'Tere maailmm!\n'))
+    # print(write_lines_to_file('file.txt', ['Tere maailm!', 'Teremaailm', 'joujoujou', 'terer mail']))
 
 
 
