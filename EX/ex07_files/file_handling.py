@@ -83,8 +83,9 @@ def write_contents_to_file(filename: str, contents: str) -> None:
     :param contents: Content to write to.
     :return: None
     """
+    contents = contents.strip()
     with open(filename, 'a') as f:
-        f.writelines(contents)
+        f.write(contents + '\n')
 
 
 def write_lines_to_file(filename: str, lines: list) -> None:
@@ -186,7 +187,7 @@ if __name__ == '__main__':
     # print(read_csv_file('data.csv'))
     print(write_contents_to_file('file.txt', 'Tere maailmm!\n'))
     print(write_contents_to_file('file.txt', 'hello worldh...\nworld\nstop'))
-    # print(write_lines_to_file('file.txt', ['Tere maailm!', 'Teremaailm', 'joujoujou', 'terer mail']))
+    print(write_lines_to_file('file.txt', ['Tere maailm!', 'Teremaailm', 'joujoujou', 'terer mail']))
 
 
 
