@@ -83,10 +83,8 @@ def write_contents_to_file(filename: str, contents: str) -> None:
     :param contents: Content to write to.
     :return: None
     """
-    content = contents.strip()
-
     with open(filename, 'a') as f:
-        f.write(content)
+        f.writelines(contents)
 
 
 def write_lines_to_file(filename: str, lines: list) -> None:
