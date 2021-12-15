@@ -77,7 +77,7 @@ class Container:
         self.orders = orders
 
     @property
-    def remaining_volume(self):
+    def volume_left(self):
         x = 0
         for order in self.orders:
             x += order.total_volume
