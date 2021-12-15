@@ -63,13 +63,26 @@ class Order:
             x += item.total_volume
         return x
 
+
 class Container:
     """Container to transport orders."""
+    def __init__(self, volume, orders):
+        """
+        Constructor that creates an container.
 
-    # define constructor
+        :param volume: Containers maximum volume.
+        :param orders: Orders that are in container.
+        """
+        self.volume = volume
+        self.orders = orders
 
-    # define volume left property method
-    pass
+    @property
+    def remaining_volume(self):
+        x = 0
+        for order in self.orders:
+            x += order.total_volume
+
+        return self.volume - x
 
 
 class OrderAggregator:
