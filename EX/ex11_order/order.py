@@ -67,7 +67,7 @@ class Order:
 
 class Container:
     """Container to transport orders."""
-    def __init__(self, volume, orders):
+    def __init__(self, volume: int, orders: list):
         """
         Constructor that creates an container.
 
@@ -121,8 +121,8 @@ class OrderAggregator:
             remaining_volume = max_volume
             if order.customer == customer and order.total_volume <= remaining_volume:
                 items.append(order)
-                remaining_volume -= order.total_volume * max_items_quantity
-            if order.customer == customer and order.total_volume > remaining_volume:
+                remaining_volume -= order.total_volume
+            if order.customer == customer and order.total_volume * max_items_quantity > remaining_volume:
                 self.order_items.remove(order)
 
         return Order(items)
@@ -137,7 +137,8 @@ class ContainerAggregator:
 
         :param container_volume: Volume of each container created by this aggregator.
         """
-        pass
+        self.container_volume = container_volume
+        self.not_used_orders = []
 
     def prepare_containers(self, orders: tuple) -> dict:
         """
@@ -148,7 +149,18 @@ class ContainerAggregator:
         :param orders: tuple of orders.
         :return: dict where keys are destinations and values are containers to that destination with orders.
         """
-        return {}
+        containers = {}
+
+        for order in orders:
+            containers[order.destination] = []
+            for container in containers[order.destination]:
+                if order.total_volume <= container.volume_left:
+                    container[order.destination] = order
+                    break
+                else:
+                    self.not_used_orders.append(order)
+
+        return containers
 
 
 if __name__ == '__main__':
@@ -183,17 +195,17 @@ if __name__ == '__main__':
 
     print(f'after orders creation, aggregator has only {len(oa.order_items)}(2 is correct) order items left.')
 
-    # print("Container Aggregator")
-    # ca = ContainerAggregator(70000)
-    # too_big_order = Order([OrderItem("Apple", "Apple Car", 10000, 300)])
-    # too_big_order.destination = "Somewhere"
-    # containers = ca.prepare_containers((order1, order2, too_big_order))
-    # print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
-    #
-    # try:
-    #     containers_to_tallinn = containers['Tallinn']
-    #     print(f'volume of the container to tallinn is {containers_to_tallinn[0].volume}(70000 is correct) cm^3')
-    #     print(f'container to tallinn has {len(containers_to_tallinn[0].orders)}(2 is correct) orders')
-    # except KeyError:
-    #     print('Container to Tallinn not found!')
-    # print(f'{len(ca.not_used_orders)}(1 is correct) cannot be added to containers')
+    print("Container Aggregator")
+    ca = ContainerAggregator(70000)
+    too_big_order = Order([OrderItem("Apple", "Apple Car", 10000, 300)])
+    too_big_order.destination = "Somewhere"
+    containers = ca.prepare_containers((order1, order2, too_big_order))
+    print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
+
+    try:
+        containers_to_tallinn = containers['Tallinn']
+        print(f'volume of the container to tallinn is {containers_to_tallinn[0].volume}(70000 is correct) cm^3')
+        print(f'container to tallinn has {len(containers_to_tallinn[0].orders)}(2 is correct) orders')
+    except KeyError:
+        print('Container to Tallinn not found!')
+    print(f'{len(ca.not_used_orders)}(1 is correct) cannot be added to containers')
