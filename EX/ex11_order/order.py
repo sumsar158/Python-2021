@@ -27,6 +27,9 @@ class OrderItem:
         """
         return self.quantity * self.one_item_volume
 
+    def __repr__(self):
+        return self.customer
+
 
 class Order:
     """Combination of order items of one customer."""
@@ -50,6 +53,7 @@ class Order:
         x = 0
         for item in self.order_items:
             x += item.quantity
+
         return x
 
     @property
@@ -117,26 +121,21 @@ class OrderAggregator:
         :return: Order.
         """
         items = []
-        remaining_volume = max_volume
-        remaining_item_count = max_items_quantity
 
         for order in self.order_items:
-            if order.total_volume <= remaining_volume and order.quantity <= remaining_item_count:
+            if order.customer == customer:
                 items.append(order)
-                remaining_volume -= order.total_volume
-                remaining_item_count -= order.quantity
-            else:
+
+        current_volume = items[0].quantity
+        remaining_item_count = 0
+
+        for order in items:
+            if current_volume <= max_volume and remaining_item_count <= max_items_quantity:
+                current_volume += order.total_volume
+                remaining_item_count += order.quantity
                 self.order_items.remove(order)
-
-
-
-        # for order in self.order_items:
-        #     remaining_volume = max_volume
-        #     if order.customer == customer and order.total_volume <= remaining_volume:
-        #         items.append(order)
-        #         remaining_volume -= order.total_volume
-        #     if order.customer == customer and order.total_volume * max_items_quantity > remaining_volume:
-        #         self.order_items.remove(order)
+            else:
+                items.remove(order)
 
         return Order(items)
 
@@ -164,15 +163,13 @@ class ContainerAggregator:
         """
         containers = {}
 
-        # for order in orders:
-        #     containers[order.destination] = []
-        #     for container in containers[order.destination]:
-        #         if order.total_volume <= container.volume_left:
-        #             container[order.destination] = order
-        #             break
-        #         elif
-        #             c = container(self.container_volume), [order]
-        #             containers[order.destination].append(c)
+        for order in orders:
+            if order.destination not in containers:
+                containers[order.destination] = []
+                if order.total_volume <= self.container_volume:
+                    containers[order.destination] = order
+                else:
+                    self.not_used_orders.append(order)
 
         return containers
 
@@ -209,17 +206,17 @@ if __name__ == '__main__':
 
     print(f'after orders creation, aggregator has only {len(oa.order_items)}(2 is correct) order items left.')
 
-    # print("Container Aggregator")
-    # ca = ContainerAggregator(70000)
-    # too_big_order = Order([OrderItem("Apple", "Apple Car", 10000, 300)])
-    # too_big_order.destination = "Somewhere"
-    # containers = ca.prepare_containers((order1, order2, too_big_order))
-    # print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
-    #
-    # try:
-    #     containers_to_tallinn = containers['Tallinn']
-    #     print(f'volume of the container to tallinn is {containers_to_tallinn[0].volume}(70000 is correct) cm^3')
-    #     print(f'container to tallinn has {len(containers_to_tallinn[0].orders)}(2 is correct) orders')
-    # except KeyError:
-    #     print('Container to Tallinn not found!')
-    # print(f'{len(ca.not_used_orders)}(1 is correct) cannot be added to containers')
+    print("Container Aggregator")
+    ca = ContainerAggregator(70000)
+    too_big_order = Order([OrderItem("Apple", "Apple Car", 10000, 300)])
+    too_big_order.destination = "Somewhere"
+    containers = ca.prepare_containers((order1, order2, too_big_order))
+    print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
+
+    try:
+        containers_to_tallinn = containers['Tallinn']
+        print(f'volume of the container to tallinn is {containers_to_tallinn[0].volume}(70000 is correct) cm^3')
+        print(f'container to tallinn has {len(containers_to_tallinn[0].orders)}(2 is correct) orders')
+    except KeyError:
+        print('Container to Tallinn not found!')
+    print(f'{len(ca.not_used_orders)}(1 is correct) cannot be added to containers')
