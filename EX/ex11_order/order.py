@@ -133,11 +133,13 @@ class OrderAggregator:
             if current_volume > max_volume or remaining_item_count > max_items_quantity:
                 items.remove(order)
                 break
-            if current_volume <= max_volume and remaining_item_count <= max_items_quantity:
-                current_volume += order.total_volume
-                remaining_item_count += order.quantity
-                items2.append(order)
-                self.order_items.remove(order)
+            try:
+                if current_volume <= max_volume and remaining_item_count <= max_items_quantity:
+                    current_volume += order.total_volume
+                    remaining_item_count += order.quantity
+                    items2.append(order)
+                    self.order_items.remove(order)
+            except:
                 continue
 
         return Order(items2)
