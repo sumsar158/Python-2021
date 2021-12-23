@@ -40,19 +40,19 @@ def get_names_and_location_from_excel_file(file_path: str) -> dict:
 
 def create_naughty_people_objects():
     """Creates a naughty person objects using naughty people and wishlist dictionaries, and adds them to Global list."""
-    for k, v in naughty_people.items():
-        for key, value in wishlist.items():
-            if k == key:
-                f = Person(name=k, country=v, nice=False, wish_list=value)
+    for name, country in naughty_people.items():
+        for name_in_wishlist, wished_items in wishlist.items():
+            if name == name_in_wishlist:
+                f = Person(name=name, country=country, nice=False, wish_list=wished_items)
                 LIST_OF_PEOPLE.append(f)
 
 
 def create_nice_people_objects():
     """Creates a nice person objects using nice people and wishlist dictionaries, and adds them to Global list."""
-    for k, v in nice_people.items():
-        for key, value in wishlist.items():
-            if k == key:
-                f = Person(name=k, country=v, nice=True, wish_list=value)
+    for name, country in nice_people.items():
+        for name_in_wishlist, wished_items in wishlist.items():
+            if name == name_in_wishlist:
+                f = Person(name=name, country=country, nice=True, wish_list=wished_items)
                 LIST_OF_PEOPLE.append(f)
 
 
