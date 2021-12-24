@@ -2,64 +2,49 @@
 import csv
 
 LIST_OF_PEOPLE = []
+WISHLIST_PATH = "C:\\Users\\rasmu\\Documents\\ex15_wish_list.csv"
+NICE_PEOPLE_PATH = "C:\\Users\\rasmu\\Documents\\ex15_nice_list.csv"
+NAUGHTY_PEOPLE_PATH = "C:\\Users\\rasmu\\Documents\\ex15_naughty_list.csv"
 
 
-def get_data_from_wishlist_excel_file(file_path: str) -> dict:
+def get_data_from_local_csv_file(file_path: str) -> dict:
     """
-    Get wishlist data from local excel file.
+    Function extracts data from csv file.
 
-    :param file_path: path of excel file.
-    :return: dictionary of peoples names (k) and their wishes (v).
+    :param file_path: local absolute path to csv file.
+    :return: dictionary of data where first row is key and rest is value.
     """
-    wishlist_dict = {}
-
-    with open(file_path, encoding="utf8") as excel_file:
-        reader = csv.reader(excel_file)
+    data = {}
+    with open(file_path, encoding="utf8") as csv_file:
+        reader = csv.reader(csv_file)
         for row in reader:
-            wishlist_dict[row[0]] = row[1:]
+            data[row[0]] = row[1:]
 
-    return wishlist_dict
+    return data
 
 
-def get_names_and_location_from_excel_file(file_path: str) -> dict:
+def create_person_instance(people_dict: dict, wishlist: dict, nice: bool):
     """
-    Get people from naughty or nice list from local excel.
+    Creates person objects using Person class and adds said objects to global LIST_OF_PEOPLE.
 
-    :param file_path: path of csv file.
-    :return: dictionary k, v = name, country
+    :param people_dict: dictionary of peoples names(key) and their location(value).
+    :param wishlist: dictionary of peoples names(key) and their wishes(value).
+    :param nice: boolean value is dict about naughty or nice people.
+    :return: confirmation string
     """
-    dict_people = {}
-
-    with open(file_path, encoding="utf8") as excel_file:
-        reader = csv.reader(excel_file)
-        for row in reader:
-            dict_people[row[0]] = row[1]
-
-    return dict_people
-
-
-def create_naughty_people_objects():
-    """Creates a naughty person objects using naughty people and wishlist dictionaries, and adds them to Global list."""
-    for name, country in naughty_people.items():
+    for name, country in people_dict.items():
         for name_in_wishlist, wished_items in wishlist.items():
             if name == name_in_wishlist:
-                f = Person(name=name, country=country, nice=False, wish_list=wished_items)
-                LIST_OF_PEOPLE.append(f)
+                p = Person(name=name, country=country, nice=nice, wishlist=wished_items)
+                LIST_OF_PEOPLE.append(p)
 
-
-def create_nice_people_objects():
-    """Creates a nice person objects using nice people and wishlist dictionaries, and adds them to Global list."""
-    for name, country in nice_people.items():
-        for name_in_wishlist, wished_items in wishlist.items():
-            if name == name_in_wishlist:
-                f = Person(name=name, country=country, nice=True, wish_list=wished_items)
-                LIST_OF_PEOPLE.append(f)
+    return print("Instances of people created")
 
 
 class Person:
     """Creates a person."""
 
-    def __init__(self, name: str, country: str, nice: bool, wish_list: list):
+    def __init__(self, name: str, country: str, nice: bool, wishlist: list):
         """
         Constructor that creates a person.
 
@@ -69,7 +54,7 @@ class Person:
         self.name = name
         self.country = country
         self.nice = nice
-        self.wish_list = wish_list
+        self.wish_list = wishlist
 
     def __repr__(self) -> str:
         """Returns person name"""
@@ -77,11 +62,11 @@ class Person:
 
 
 if __name__ == '__main__':
+    nice_people_dict = get_data_from_local_csv_file(NICE_PEOPLE_PATH)
+    naughty_people_dict = get_data_from_local_csv_file(NAUGHTY_PEOPLE_PATH)
+    wish_list = get_data_from_local_csv_file(WISHLIST_PATH)
 
-    nice_people = get_names_and_location_from_excel_file("C:\\Users\\rasmu\\Documents\\ex15_nice_list.csv")
-    naughty_people = get_names_and_location_from_excel_file("C:\\Users\\rasmu\\Documents\\ex15_naughty_list.csv")
-    wishlist = get_data_from_wishlist_excel_file("C:\\Users\\rasmu\\Documents\\ex15_wish_list.csv")
-    create_naughty_people_objects()
-    create_nice_people_objects()
+    create_person_instance(nice_people_dict, wish_list, True)
+    create_person_instance(naughty_people_dict, wish_list, False)
 
     print(len(LIST_OF_PEOPLE))
