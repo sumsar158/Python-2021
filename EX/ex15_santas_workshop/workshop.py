@@ -1,10 +1,16 @@
 """Santa's workshop."""
 import csv
+import json
+import urllib.request
+import urllib.parse
+import urllib.error
 
 LIST_OF_PEOPLE = []
+DICT_OF_PEOPLE = {}
 WISHLIST_PATH = "C:\\Users\\rasmu\\Documents\\ex15_wish_list.csv"
 NICE_PEOPLE_PATH = "C:\\Users\\rasmu\\Documents\\ex15_nice_list.csv"
 NAUGHTY_PEOPLE_PATH = "C:\\Users\\rasmu\\Documents\\ex15_naughty_list.csv"
+API_URL = "http://api.game-scheduler.com:8089/gift?"
 
 
 def get_data_from_local_csv_file(file_path: str) -> dict:
@@ -25,7 +31,7 @@ def get_data_from_local_csv_file(file_path: str) -> dict:
 
 def create_person_instance(people_dict: dict, wishlist: dict, nice: bool):
     """
-    Creates person objects using Person class and adds said objects to global LIST_OF_PEOPLE.
+    Creates person objects using Person class and adds said objects to global DICT_OF_PEOPLE.
 
     :param people_dict: dictionary of peoples names(key) and their location(value).
     :param wishlist: dictionary of peoples names(key) and their wishes(value).
@@ -36,21 +42,24 @@ def create_person_instance(people_dict: dict, wishlist: dict, nice: bool):
         for name_in_wishlist, wished_items in wishlist.items():
             if name == name_in_wishlist:
                 p = Person(name=name, country=country, nice=nice, wishlist=wished_items)
+                DICT_OF_PEOPLE[name] = p
                 LIST_OF_PEOPLE.append(p)
 
-    return print("Instances of people created")
+    return print(f"Instances of people created, nice : {nice}")
 
 
 class Person:
     """Creates a person."""
 
-    def __init__(self, name: str, country: str, nice: bool, wishlist: list):
+    def __init__(self, name="", country="", nice=True, wishlist=None):
         """
         Constructor that creates a person.
 
         :param name: name of the child.
         :param country: country or origins.
         """
+        if wishlist is None:
+            wishlist = []
         self.name = name
         self.country = country
         self.nice = nice
@@ -61,6 +70,57 @@ class Person:
         return self.name
 
 
+class Product:
+    def __init__(self, name, price, production_time, weight):
+        self.name = name
+        self.price = price
+        self.production_time = production_time
+        self.weight = weight
+
+    def __repr__(self):
+        return f"Product ({self.name}, {self.weight} g)"
+
+
+class Warehouse:
+    def __init__(self):
+        self.products = {}
+
+    def get_product_from_factory(self, name: str) -> Product | None:
+        qs = urllib.parse.urlencode({"name": name})
+        try:
+            with urllib.request.urlopen(API_URL + qs) as f:
+                # read all
+                contents = f.read()
+
+                # to convert into regular string
+                contents.decode("utf-8")
+
+                # read json to python object
+                data = json.loads(contents.decode('utf-8'))
+
+                product = Product(name=data['gift'],
+                                  price=data['material_cost'],
+                                  production_time=data['production_time'],
+                                  weight=data['weight_in_grams'])
+
+                if data['gift'] not in self.products:
+                    self.products[data['gift']] = []
+                self.products[data['gift']].append(product)
+
+                return product
+
+        except urllib.error.HTTPError:
+            return None
+
+    def get_product(self, name):
+        return self.products.get(name)
+
+
+def items():
+    for k, v in get_data_from_local_csv_file(WISHLIST_PATH):
+        warehouse.get_product_from_factory(k)
+
+
 if __name__ == '__main__':
     nice_people_dict = get_data_from_local_csv_file(NICE_PEOPLE_PATH)
     naughty_people_dict = get_data_from_local_csv_file(NAUGHTY_PEOPLE_PATH)
@@ -69,4 +129,11 @@ if __name__ == '__main__':
     create_person_instance(nice_people_dict, wish_list, True)
     create_person_instance(naughty_people_dict, wish_list, False)
 
-    print(len(LIST_OF_PEOPLE))
+    print(len(DICT_OF_PEOPLE))
+
+    warehouse = Warehouse()
+    print(warehouse.get_product_from_factory("swimming flippers"))
+    print(warehouse.get_product_from_factory("Small watering can"))
+    print(warehouse.get_product_from_factory("VHS player"))
+    print(warehouse.products.get("VHS player"))
+    print(warehouse.get_product("VHS player"))
