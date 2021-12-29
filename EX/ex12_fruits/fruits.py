@@ -83,8 +83,10 @@ class App:
         lines = []
         with open("pricelist.txt") as f:
             for line in f:
+                line = line.strip()
+                line = line.replace(" ", "")
                 line = line.split("-")
-                p = Product(name=str(line[0]), price=float(line[1]))
+                p = Product(name=str(line[0]), price=float(line[-1]))
                 lines.append(p)
         return lines
 
@@ -97,7 +99,7 @@ class App:
         """
         pass
 
-    def order(self):
+    def order(self, order, ok):
         """
         Method for ordering products for a customer.
 
