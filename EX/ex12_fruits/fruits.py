@@ -62,7 +62,7 @@ class App:
 
     def get_products(self) -> list:
         """Getter for products list."""
-        self.products = self.import_products("pricelist.txt")
+        self.products = self.import_products()
         pass
 
     def find_product_by_name(self, name: str) -> Product:
