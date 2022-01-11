@@ -72,6 +72,7 @@ class Person:
 
 class Product:
     def __init__(self, name, price, production_time, weight):
+
         self.name = name
         self.price = price
         self.production_time = production_time

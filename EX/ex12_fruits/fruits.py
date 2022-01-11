@@ -68,7 +68,7 @@ class App:
 
     def __init__(self):
         """App constructor, no arguments expected."""
-        pass
+        self.products = []
 
     def get_products(self) -> list:
         """Getter for products list."""
