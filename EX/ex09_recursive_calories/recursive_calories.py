@@ -1,4 +1,4 @@
-"""Let's count calories!"""
+"""Let's count calories."""
 
 
 def recursive_reverse(s: str) -> str:
@@ -38,7 +38,8 @@ def x_sum_loop(nums, x) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    pass
+    if x == 0:
+        return 0
 
 
 def x_sum_recursion(nums, x) -> int:
@@ -63,7 +64,8 @@ def x_sum_recursion(nums, x) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    pass
+    if x == 0:
+        return 0
 
 
 def lets_count_calories(salad: float, chocolate_pieces: int, fridge_visits: int) -> int:
@@ -145,6 +147,7 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     :return: dict of given symbols and their count
     """
     pass
+
 
 if __name__ == '__main__':
     print(recursive_reverse('222sss'))
