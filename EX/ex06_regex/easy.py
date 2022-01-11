@@ -18,7 +18,7 @@ def find_words(text: str) -> list:
     list_of_words = []
     regex = '[A-ZÖÄÜÕ][a-züöäõ]+'
 
-    for match in re.finditer(regex, text):
+    for match in re.findall(regex, text):
         list_of_words.append(match)
 
     return list_of_words
