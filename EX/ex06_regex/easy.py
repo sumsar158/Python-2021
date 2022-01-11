@@ -60,7 +60,7 @@ def find_sentences(text: str) -> list:
     :return: list of sentences found in given string
     """
     list_of_sentences = []
-    regex = r'([A-Z][^\.!?]*[\.!?])'
+    regex = r'([A-ZÖÄÜÕ][^\.!?]*[\.!?])'
 
     for match in re.findall(regex, text):
         list_of_sentences.append(match)
