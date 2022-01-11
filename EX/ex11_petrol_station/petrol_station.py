@@ -1,5 +1,4 @@
 """Petrol Station."""
-import copy
 from abc import ABC, abstractmethod
 from datetime import date
 from enum import Enum, auto
@@ -15,10 +14,12 @@ class ClientType(Enum):
 
          1) basic (he is not a regular customer and he has no discounts)
 
-         2) bronze customer (membership in the club starts with a discount of 0.025 euros for each liter of fuel and in the store
+         2) bronze customer (membership in the club starts with a discount of 0.025 euros for each liter of fuel and
+         in the store
          5% for the goods received)
 
-         3) silver customer (II level club membership, the conditions for receiving it is that the amount of purchases is 1000 euros,
+         3) silver customer (II level club membership, the conditions for receiving it is that the amount of purchases
+         is 1000 euros,
          there is a discount on fuel in the amount of 0.05 euros and a 10% discount on goods in the store)
 
          4) gold customer (club membership level III, awarded for purchases of EUR 5,000,

@@ -28,6 +28,7 @@ class OrderItem:
         return self.quantity * self.one_item_volume
 
     def __repr__(self):
+        """Represents customer by name."""
         return self.customer
 
 
@@ -83,6 +84,7 @@ class Container:
 
     @property
     def volume_left(self):
+        """Returns volume left."""
         x = 0
         for order in self.orders:
             x += order.total_volume
@@ -92,7 +94,6 @@ class Container:
 
 class OrderAggregator:
     """Algorithm of aggregating orders."""
-
     def __init__(self):
         """
         Initialize order aggregator.
