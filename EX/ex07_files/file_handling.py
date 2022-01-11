@@ -1,9 +1,11 @@
+"""File handling."""
 import csv
 
 
 def read_file_contents(filename: str) -> str:
     """
     Read file contents into string.
+
     In this exercise, we can assume the file exists.
 
     :param filename: File to read.
@@ -26,7 +28,7 @@ def read_file_contents_to_list(filename: str) -> list:
     Each line from the file should be a separate element.
     The order of the list should be the same as in the file.
 
-    List elements should not contain new line (\n).
+    List elements should not contain new line (n).
 
     :param filename: File to read.
     :return: List of lines.
@@ -205,6 +207,7 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
     the result is an empty list.
 
     The order of the elements in the list should be the same
+
     as the lines in the file (the first line becomes the first element etc.)
 
     :param filename: CSV-file to read.
@@ -215,7 +218,7 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
         csv_reader = csv.reader(csv_file, delimiter=',')
         next(csv_reader)
         for row in csv_reader:
-            if not row:
+            if not row[0]:
                 break
             d = {"name": row[0], "age": row[1], "sex": row[2], "town": row[3]}
             list_elements.append(d)
@@ -226,7 +229,6 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
 def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     """
     Write list of dicts into csv file.
-
     Data contains a list of dictionaries.
     Dictionary key represents the field.
 
@@ -262,7 +264,6 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     :param data: List of dictionaries to write to the file.
     :return: None
     """
-
     with open(filename, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=";")
         # header
