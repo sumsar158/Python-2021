@@ -215,6 +215,8 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
         csv_reader = csv.reader(csv_file, delimiter=',')
         next(csv_reader)
         for row in csv_reader:
+            if not row:
+                break
             d = {"name": row[0], "age": row[1], "sex": row[2], "town": row[3]}
             list_elements.append(d)
 
