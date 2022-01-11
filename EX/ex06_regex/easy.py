@@ -161,11 +161,17 @@ def find_phone_numbers(text: str) -> dict:
     regex = r'\+\d{3}? +\d+|\+\d{3}?\d+|\d+'
 
     for match in re.findall(regex, text):
-        print(match)
-        if match[0] == '+':
-            numbers[match[0:4]] = match[4:]
+        match = match.replace(" ", "")
+
+        if match[0:4] not in numbers.keys() and match[0] == '+':
+            numbers[match[0:4]] = []
+        if "" not in numbers.keys() and match[0] != '+':
+            numbers[""] = []
+
+        if match[0:4] in numbers.keys():
+            numbers[match[0:4]].append(match[4:])
         else:
-            numbers[""] = match
+            numbers[""].append(match)
 
     return numbers
 
@@ -181,4 +187,4 @@ if __name__ == '__main__':
         'See on esimene - ä lause. See, on teine: lause! see ei ole lause. Aga kas see on? jah, oli.'))  # ['See', 'on', 'esimene', 'ä', 'lause', 'See', 'on', 'teine', 'lause', 'Aga', 'kas', 'see', 'on']
     print(find_years("1998sef672387fh3f87fh83777f777f7777f73wfj893w8938434343"))  # [1998, 7777]
     print(find_phone_numbers(
-        "+372 56887364  +37256887364  +33359835647  56887364"))  # {'+372': ['56887364', '56887364'], '+333': ['59835647'], '': ['56887364']}
+        "+372 56887364  +37256887364  +33359835647  56887364"))  # {'+372': ['56887364', '56788364'], '+333': ['59835647'], '': ['56887364']}
