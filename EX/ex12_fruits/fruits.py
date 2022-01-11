@@ -14,6 +14,7 @@ class Product:
         self.name = name
 
     def __repr__(self):
+        """Represents product by name."""
         return self.name
 
 
