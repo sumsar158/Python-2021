@@ -133,6 +133,7 @@ def find_years(text: str) -> list:
     regex = r'(?<!\d)\d{4}(?!\d)'
 
     for match in re.findall(regex, text):
+        match = int(match)
         years.append(match)
 
     return years
