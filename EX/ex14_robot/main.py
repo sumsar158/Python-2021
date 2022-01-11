@@ -1,4 +1,6 @@
+"""Robot."""
 from FollowerBot import FollowerBot
+
 
 def follow_the_line(robot: FollowerBot):
     """
@@ -12,7 +14,6 @@ def follow_the_line(robot: FollowerBot):
         print(robot.get_position())
         robot.set_wheels_speed(30)
         robot.sleep(1)
-
 
 
 if __name__ == '__main__':
