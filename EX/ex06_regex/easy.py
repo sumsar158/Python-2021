@@ -1,4 +1,4 @@
-"""Regex, yay!"""
+"""Regex, yay."""
 import re
 
 
@@ -102,10 +102,7 @@ def find_words_from_sentences_only(text: str) -> list:
     :return: list of words found in sentences from given string
     """
     sentences = find_sentences(text)
-    print(sentences)
     list_of_words = []
-    l = ""
-    regex = '[A-ZÖÄÜÕ][a-züöäõ]+'
 
     for sentence in sentences:
         s = find_words_from_sentence(sentence)
