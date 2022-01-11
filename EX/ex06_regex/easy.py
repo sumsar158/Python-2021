@@ -16,8 +16,12 @@ def find_words(text: str) -> list:
     :return: list of words found in given string
     """
     list_of_words = []
-    regex = 
-    pass
+    regex = '[A-ZÕÖÄÜ]+[a-zöõüä]+'
+
+    for match in re.finditer(regex, text):
+        list_of_words.append(match)
+
+    return list_of_words
 
 
 def find_words_with_vowels(text: str) -> list:
