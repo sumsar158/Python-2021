@@ -157,7 +157,17 @@ def find_phone_numbers(text: str) -> dict:
     :param text: given string to find phone numbers from
     :return: dict containing the numbers
     """
-    pass
+    numbers = {}
+    regex = r'\+\d{3}? +\d+|\+\d{3}?\d+|\d+'
+
+    for match in re.findall(regex, text):
+        print(match)
+        if match[0] == '+':
+            numbers[match[0:4]] = match[4:]
+        else:
+            numbers[""] = match
+
+    return numbers
 
 
 if __name__ == '__main__':
