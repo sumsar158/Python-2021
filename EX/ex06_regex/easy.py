@@ -59,7 +59,13 @@ def find_sentences(text: str) -> list:
     :param text: given string to find sentences from
     :return: list of sentences found in given string
     """
-    pass
+    list_of_sentences = []
+    regex = r'([A-Z][^\.!?]*[\.!?])'
+
+    for match in re.findall(regex, text):
+        list_of_sentences.append(match)
+
+    return list_of_sentences
 
 
 def find_words_from_sentence(sentence: str) -> list:
