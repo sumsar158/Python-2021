@@ -99,6 +99,7 @@ class App:
                 line = line.split("-")
                 p = Product(name=str(line[0]), price=float(line[-1]))
                 lines.append(p)
+        print(lines)
         return lines
 
     def order_products(self):
@@ -173,9 +174,9 @@ if __name__ == '__main__':
     # Checking products list.
     print(app.get_products())
     print("=======")
-    # # Checking how all orders and summary look like.
-    # print(app.show_all_orders(False))
-    # print("=======")
-    # print(app.show_all_orders(True))
-    # print("=======")
-    # app.calculate_summary()
+    # Checking how all orders and summary look like.
+    print(app.show_all_orders(False))
+    print("=======")
+    print(app.show_all_orders(True))
+    print("=======")
+    app.calculate_summary()
