@@ -1,5 +1,6 @@
 """Fruits delivery application."""
 
+
 class Product:
     """Product class."""
 
@@ -26,7 +27,7 @@ class Order:
         Expected default customer parameter starting from Part 3. Also, products dictionary
         is expected to be created and products names set as a helper.
         """
-        pass
+        self.products_to_order = {}
 
     def get_products_string(self) -> str:
         """
@@ -39,13 +40,21 @@ class Order:
         """
         pass
 
-    def add_product(self, product):
+    def add_product(self, product: tuple):
         """Method for adding a single product to the dictionary."""
-        pass
+        products_dict = self.products_to_order
+
+        if product[0] not in products_dict.keys():
+            products_dict[product[0]] = 0
+        if product in products_dict.items():
+            products_dict[product[0]] += product[1]
 
     def add_products(self, products):
         """Method for adding several products to the dictionary."""
         pass
+
+    def get_products(self):
+        return self.products_to_order
 
 
 class App:
@@ -62,13 +71,14 @@ class App:
 
     def get_products(self) -> list:
         """Getter for products list."""
-        self.products = self.import_products()
-        pass
+        return self.import_products()
 
-    def find_product_by_name(self, name: str) -> Product:
-        for product in self.import_products():
-            if product == name:
+    def find_product_by_name(self, name: str) -> Product | None:
+        for product in self.get_products():
+            if product.name == name:
                 return product
+
+        return print("Product not found")
 
     def get_orders(self) -> list:
         """Getter for orders list."""
@@ -99,7 +109,7 @@ class App:
         """
         pass
 
-    def order(self, order, ok):
+    def order(self):
         """
         Method for ordering products for a customer.
 
@@ -155,12 +165,16 @@ if __name__ == '__main__':
     app.order("Svetozar", [("Grapefruit", 10)])
     app.order("Muhhamad", [("Grenades", 13), ("Cannon", 1), ("Red pepper", 666)])
     app.order("Toivo", [("Granadilla", 3), ("Chestnut", 3), ("Pitaya(Dragon Fruit)", 3)])
+
+    print(app.find_product_by_name(name="Eggplant"))
+    print(app.find_product_by_name(name="lol"))
+
     # Checking products list.
     print(app.get_products())
     print("=======")
-    # Checking how all orders and summary look like.
-    print(app.show_all_orders(False))
-    print("=======")
-    print(app.show_all_orders(True))
-    print("=======")
-    app.calculate_summary()
+    # # Checking how all orders and summary look like.
+    # print(app.show_all_orders(False))
+    # print("=======")
+    # print(app.show_all_orders(True))
+    # print("=======")
+    # app.calculate_summary()
