@@ -53,9 +53,9 @@ def parse(row: str) -> Entry:
     :param row: String representation of the data.
     :return: Entry object with filled values
     """
-    match = re.search(r"([A-ZÖÄÜÕa-züöäõ]+)?(\d{11})(\+\d{3} \d{8})?(\d{2}-\d{2}-\d{4})?(.+)?", row)
+    match = re.search(r"([A-ZÖÄÜÕ][a-züöäõ]+)?([A-ZÖÄÜÕ][a-züöäõ]+)?(\d{11})(\+\d{3} \d{8})?(\d{2}-\d{2}-\d{4})?(.+)?", row)
 
-    return Entry(match.group(1), match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
+    return Entry(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5), match.group(6))
 
 
 if __name__ == '__main__':
