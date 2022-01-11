@@ -162,14 +162,15 @@ def find_phone_numbers(text: str) -> dict:
 
     for match in re.findall(regex, text):
         match = match.replace(" ", "")
+        area_code = match[0:4]
 
-        if match[0:4] not in numbers.keys() and match[0] == '+':
-            numbers[match[0:4]] = []
-        if "" not in numbers.keys() and match[0] != '+':
+        if match[0] == '+' and area_code not in numbers.keys():
+            numbers[area_code] = []
+        if match[0] != '+' and "" not in numbers.keys():
             numbers[""] = []
 
-        if match[0:4] in numbers.keys():
-            numbers[match[0:4]].append(match[4:])
+        if area_code in numbers.keys():
+            numbers[area_code].append(match[4:])
         else:
             numbers[""].append(match)
 
