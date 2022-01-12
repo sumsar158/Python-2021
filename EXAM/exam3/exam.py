@@ -338,6 +338,7 @@ class Car:
         self.fuel = 100
         self.accessories = []
         self.premium = bool
+        self.value = 0
 
     def add_accessory(self, accessory: Accessory):
         """Add accessory to the car."""
@@ -350,7 +351,11 @@ class Car:
         Regular car base price is 9500, for premium car its 42 500.
         All the values of accessories are summed up.
         """
-        value = 0
+        if self.premium:
+            value = 42500
+        else:
+            value = 9500
+
         if self.accessories:
             for a in self.accessories:
                 value += a.value
@@ -459,7 +464,7 @@ class Dealership:
         """Make a car premium, which can can be sold only to premium customers."""
         car.premium = True
 
-    def get_all_premium_cars(self):
+    def get_all_premium_cars(self) -> list:
         """Return all the premium cars sorted by value (ascending, lower to higher)."""
         premium_cars = []
         for car in self.inventory:
@@ -474,7 +479,19 @@ class Dealership:
         After selling, the car is removed from the dealership and moved into customer's garage.
         In the given exercise, there is always a matching car.
         """
-        pass
+        wish = (customer.wish.split())
+        color = wish[1]
+        car_type = wish[0]
+        premium_cars = self.get_all_premium_cars()
+        regular_cars = self.get_all_regular_cars()
+        print(wish)
+        if customer.premium_status:
+            for car in premium_cars:
+                if car.color == color:
+                    customer.garage.append(car)
+                    self.inventory.remove(car)
+
+
 
 
 if __name__ == '__main__':
