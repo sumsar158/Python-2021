@@ -301,13 +301,15 @@ class University:
 
         :return: list of Student objects
         """
+        highest_gpa = []
         x = 2.1
         for student in self.ENROLLED_STUDENTS:
             if student.gpa > x:
                 x = student.gpa
         for student in self.ENROLLED_STUDENTS:
             if student.gpa == x:
-                return student
+                highest_gpa.append(student)
+                return highest_gpa
 
 
 class Accessory:
