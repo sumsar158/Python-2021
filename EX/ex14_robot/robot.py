@@ -23,6 +23,11 @@ def drive_to_line(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
+    robot.set_wheels_speed(10)
+    if robot.get_line_sensors():
+        robot.set_wheels_speed(0)
+        for i in range(6):
+            robot.set_wheels_speed(5)
 
 
 def follow_the_line(robot: FollowerBot):
@@ -49,5 +54,5 @@ def the_true_follower(robot: FollowerBot):
 
 
 if __name__ == '__main__':
-    robot = FollowerBot(track_image='track.png', start_x=450, start_y=300)
-    follow_the_line(robot)
+    robot = FollowerBot(track_image='track.png', start_x=450, start_y=200)
+    drive_to_line(robot)
