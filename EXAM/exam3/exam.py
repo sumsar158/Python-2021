@@ -303,8 +303,8 @@ class University:
         """
         highest_gpa = []
         x = 0
-        if not self.ENROLLED_STUDENTS:
-            return None
+        if len(self.ENROLLED_STUDENTS) == 0:
+            return []
         for student in self.ENROLLED_STUDENTS:
             if student.gpa > x:
                 x = student.gpa
