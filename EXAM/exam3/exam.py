@@ -184,9 +184,6 @@ def make_table(n: int) -> str:
     pass
 
 
-STUDENTS = []
-
-
 class Student:
     """Represent student model."""
 
@@ -319,7 +316,8 @@ class Accessory:
 
     def __init__(self, name: str, value: int):
         """Constructor."""
-        pass
+        self.value = value
+        self.name = name
 
     def __repr__(self):
         """
@@ -327,7 +325,7 @@ class Accessory:
 
         Returns string in form "{name}, value : {value}."
         """
-        pass
+        return f"{self.name}, value : {self.value}."
 
 
 class Car:
@@ -335,11 +333,15 @@ class Car:
 
     def __init__(self, name: str, color: str):
         """Constructor."""
-        pass
+        self.color = color
+        self.name = name
+        self.fuel = 100
+        self.accessories = []
+        self.premium = bool
 
     def add_accessory(self, accessory: Accessory):
         """Add accessory to the car."""
-        pass
+        self.accessories.append(accessory)
 
     def get_value(self) -> int:
         """
@@ -348,15 +350,23 @@ class Car:
         Regular car base price is 9500, for premium car its 42 500.
         All the values of accessories are summed up.
         """
-        pass
+        value = 0
+        if self.accessories:
+            for a in self.accessories:
+                value += a.value
+
+        return value
 
     def get_fuel_left(self):
         """Return how much fuel is left in percentage."""
-        pass
+        return self.fuel
 
     def get_accessories_by_value(self):
         """Return accessories sorted by value (descending i.e. higher to lower)."""
-        pass
+        if self.accessories:
+            return sorted(self.accessories, key=lambda v: v.value, reverse=True)
+        else:
+            return None
 
     def __repr__(self):
         """
@@ -364,7 +374,7 @@ class Car:
 
         Should return "This {color} {name} contains {accessory_amount} accessories and has {fuel}% fuel left."
         """
-        pass
+        return f"This {self.color} {self.name} contains {self.accessories} accessories and has {self.fuel}% fuel left."
 
 
 class Customer:
@@ -384,7 +394,10 @@ class Customer:
 
         For example: "Cheap Red", "Expensive Yellow".
         """
-        pass
+        self.wish = wish
+        self.name = name
+        self.garage = []
+        self.premium_status = bool
 
     def get_garage(self):
         """
@@ -392,11 +405,14 @@ class Customer:
 
         Both regular and premium cars are kept in garage.
         """
-        pass
+        if self.garage:
+            return sorted(self.garage, key=lambda c: c.value)
+        else:
+            return None
 
     def make_premium(self):
         """Make customer a premium customer, premium cars can be sold to the customer now."""
-        pass
+        self.premium_status = True
 
     def drive_with_car(self, driving_style: str):
         """
@@ -409,7 +425,14 @@ class Customer:
         Regular driving takes 15 percentage points of fuel, "Rally" takes 35 percentage points (85% - 35% => 50%).
         If the fuel gets to zero during the drive, the car is left behind (it is no longer part of garage).
         """
-        pass
+        garage = self.get_garage()
+        if self.get_garage():
+            cheapest_car = garage[0]
+            if driving_style == "Rally":
+                car = garage[0]
+                car.fuel -= 35
+                if car.fuel <= 0:
+                    garage.remove(car)
 
 
 class Dealership:
@@ -417,23 +440,32 @@ class Dealership:
 
     def __init__(self, name: str):
         """Constructor."""
-        pass
+        self.name = name
+        self.inventory = []
 
     def add_car(self, car: Car):
         """Car is added to dealership."""
-        pass
+        self.inventory.append(car)
 
     def get_all_regular_cars(self):
         """Return all the regular cars sorted by value (ascending, lower to higher)."""
-        pass
+        regular_cars = []
+        for car in self.inventory:
+            if not car.premium:
+                regular_cars.append(car)
+        return regular_cars
 
     def make_car_premium(self, car: Car):
         """Make a car premium, which can can be sold only to premium customers."""
-        pass
+        car.premium = True
 
     def get_all_premium_cars(self):
         """Return all the premium cars sorted by value (ascending, lower to higher)."""
-        pass
+        premium_cars = []
+        for car in self.inventory:
+            if car.premium:
+                premium_cars.append(car)
+        return premium_cars
 
     def sell_car_to_customer(self, customer: Customer):
         """
@@ -498,49 +530,49 @@ if __name__ == '__main__':
 
     # university
 
-    university = University("taltech", 60)
-    student = Student("Bob", 61, 18)
-    print(university.can_enroll_student(student))  # True
-    print(university.can_unenroll_student(student))  # False; student is not yet in university
+    # university = University("taltech", 60)
+    # student = Student("Bob", 61, 18)
+    # print(university.can_enroll_student(student))  # True
+    # print(university.can_unenroll_student(student))  # False; student is not yet in university
+    #
+    # university.enroll_student(student)
+    # print(university.get_students())  # [student]
+    # print(university.get_student_highest_gpa())  # [student]; since this student is the only one
+    #
+    # print(university.can_unenroll_student(student))  # True
+    # university.unenroll_student(student)
+    # print(university.get_students())  # []
+    # print(university.get_student_highest_gpa())
 
-    university.enroll_student(student)
-    print(university.get_students())  # [student]
-    print(university.get_student_highest_gpa())  # [student]; since this student is the only one
+    # dealership
 
-    print(university.can_unenroll_student(student))  # True
-    university.unenroll_student(student)
-    print(university.get_students())  # []
-    print(university.get_student_highest_gpa())
+    blue_car = Car("Audi R4", "blue")
+    green_car = Car("Ford", "green")
+    wheel = Accessory("Sport wheel", 500)
+    blue_car.add_accessory(wheel)
+    car_dealer = Dealership("Ago Carfriend")
+    car_dealer.add_car(blue_car)
+    car_dealer.add_car(green_car)
 
-    # # dealership
-    #
-    # blue_car = Car("Audi R4", "blue")
-    # green_car = Car("Ford", "green")
-    # wheel = Accessory("Sport wheel", 100)
-    # blue_car.add_accessory(wheel)
-    # car_dealer = Dealership("Ago Carfriend")
-    # car_dealer.add_car(blue_car)
-    # car_dealer.add_car(green_car)
-    #
-    # print(car_dealer.get_all_regular_cars())
-    # # [This green Ford contains 0 accessories and has 100% fuel left.,
-    # # This blue Audi R4 contains 1 accessories and has 100% fuel left.]
-    # print(car_dealer.get_all_premium_cars())  # []
-    #
-    # customer = Customer("Ago", "Cheap green")
-    # car_dealer.sell_car_to_customer(customer)
-    # print(customer.get_garage())  # [This green Ford contains 0 accessories and has 100% fuel left.]
-    # customer.drive_with_car("Rally")
-    # print(customer.get_garage())  # [This green Ford contains 0 accessories and has 65% fuel left.]
-    # customer.drive_with_car("Rally")
-    # customer.drive_with_car("Rally")
-    # print(customer.get_garage())  # []]
-    #
-    # car_dealer.make_car_premium(blue_car)
-    # print(car_dealer.get_all_premium_cars())  # [This blue Audi R4 contains 1 accessories and has 100% fuel left.]
-    #
-    # customer_premium = Customer("Ago", "Expensive black")
-    # customer_premium.make_premium()
-    # car_dealer.sell_car_to_customer(customer_premium)
-    # print(customer_premium.get_garage())  # [This blue Audi R4 contains 1 accessories and has 100% fuel left.]
+    print(car_dealer.get_all_regular_cars())
+    # [This green Ford contains 0 accessories and has 100% fuel left.,
+    # This blue Audi R4 contains 1 accessories and has 100% fuel left.]
+    print(car_dealer.get_all_premium_cars())  # []
+
+    customer = Customer("Ago", "Cheap green")
+    car_dealer.sell_car_to_customer(customer)
+    print(customer.get_garage())  # [This green Ford contains 0 accessories and has 100% fuel left.]
+    customer.drive_with_car("Rally")
+    print(customer.get_garage())  # [This green Ford contains 0 accessories and has 65% fuel left.]
+    customer.drive_with_car("Rally")
+    customer.drive_with_car("Rally")
+    print(customer.get_garage())  # []]
+
+    car_dealer.make_car_premium(blue_car)
+    print(car_dealer.get_all_premium_cars())  # [This blue Audi R4 contains 1 accessories and has 100% fuel left.]
+
+    customer_premium = Customer("Ago", "Expensive black")
+    customer_premium.make_premium()
+    car_dealer.sell_car_to_customer(customer_premium)
+    print(customer_premium.get_garage())  # [This blue Audi R4 contains 1 accessories and has 100% fuel left.]
 
