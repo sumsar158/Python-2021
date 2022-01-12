@@ -379,7 +379,8 @@ class Car:
 
         Should return "This {color} {name} contains {accessory_amount} accessories and has {fuel}% fuel left."
         """
-        return f"This {self.color} {self.name} contains {self.accessories} accessories and has {self.fuel}% fuel left."
+        accessory_amount = len(self.accessories)
+        return f"This {self.color} {self.name} contains {accessory_amount} accessories and has {self.fuel}% fuel left."
 
 
 class Customer:
@@ -458,7 +459,7 @@ class Dealership:
         for car in self.inventory:
             if not car.premium:
                 regular_cars.append(car)
-        return regular_cars
+        return sorted(regular_cars, key=lambda c: c.value, reverse=True)
 
     def make_car_premium(self, car: Car):
         """Make a car premium, which can can be sold only to premium customers."""
@@ -470,7 +471,7 @@ class Dealership:
         for car in self.inventory:
             if car.premium:
                 premium_cars.append(car)
-        return premium_cars
+        return sorted(premium_cars, key=lambda c: c.value, reverse=True)
 
     def sell_car_to_customer(self, customer: Customer):
         """
@@ -484,14 +485,17 @@ class Dealership:
         car_type = wish[0]
         premium_cars = self.get_all_premium_cars()
         regular_cars = self.get_all_regular_cars()
-        print(wish)
         if customer.premium_status:
             for car in premium_cars:
                 if car.color == color:
                     customer.garage.append(car)
                     self.inventory.remove(car)
 
-
+        if not customer.premium_status:
+                for car in regular_cars:
+                    if car.color == color:
+                        customer.garage.append(car)
+                        self.inventory.remove(car)
 
 
 if __name__ == '__main__':
@@ -566,7 +570,9 @@ if __name__ == '__main__':
     blue_car = Car("Audi R4", "blue")
     green_car = Car("Ford", "green")
     wheel = Accessory("Sport wheel", 500)
+    wheel2 = Accessory("Sport wh22eel", 200)
     blue_car.add_accessory(wheel)
+    blue_car.add_accessory(wheel2)
     car_dealer = Dealership("Ago Carfriend")
     car_dealer.add_car(blue_car)
     car_dealer.add_car(green_car)
