@@ -303,15 +303,14 @@ class University:
         """
         highest_gpa = []
         x = 0
+        if not self.ENROLLED_STUDENTS:
+            return None
         for student in self.ENROLLED_STUDENTS:
             if student.gpa > x:
                 x = student.gpa
         for student in self.ENROLLED_STUDENTS:
             if student.gpa == x:
                 highest_gpa.append(student)
-
-        if len(highest_gpa) < 1:
-            return None
         return highest_gpa
 
 
@@ -511,6 +510,7 @@ if __name__ == '__main__':
     print(university.can_unenroll_student(student))  # True
     university.unenroll_student(student)
     print(university.get_students())  # []
+    print(university.get_student_highest_gpa())
 
     # # dealership
     #
