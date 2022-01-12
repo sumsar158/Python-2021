@@ -337,8 +337,11 @@ class Car:
         self.name = name
         self.fuel = 100
         self.accessories = []
-        self.premium = bool
-        self.value = 0
+        self.premium = False
+        if self.premium:
+            self.value = 42500
+        else:
+            self.value = 9200
 
     def add_accessory(self, accessory: Accessory):
         """Add accessory to the car."""
@@ -351,27 +354,22 @@ class Car:
         Regular car base price is 9500, for premium car its 42 500.
         All the values of accessories are summed up.
         """
-        if self.premium:
-            value = 42500
-        else:
-            value = 9500
-
         if self.accessories:
             for a in self.accessories:
-                value += a.value
+                self.value += a.value
 
-        return value
+        return self.value
 
     def get_fuel_left(self):
         """Return how much fuel is left in percentage."""
         return self.fuel
 
-    def get_accessories_by_value(self):
+    def get_accessories_by_value(self) -> list:
         """Return accessories sorted by value (descending i.e. higher to lower)."""
         if self.accessories:
             return sorted(self.accessories, key=lambda v: v.value, reverse=True)
         else:
-            return None
+            return []
 
     def __repr__(self):
         """
@@ -459,7 +457,7 @@ class Dealership:
         for car in self.inventory:
             if not car.premium:
                 regular_cars.append(car)
-        return sorted(regular_cars, key=lambda c: c.value, reverse=True)
+        return sorted(regular_cars, key=lambda c: c.value)
 
     def make_car_premium(self, car: Car):
         """Make a car premium, which can can be sold only to premium customers."""
@@ -471,7 +469,7 @@ class Dealership:
         for car in self.inventory:
             if car.premium:
                 premium_cars.append(car)
-        return sorted(premium_cars, key=lambda c: c.value, reverse=True)
+        return sorted(premium_cars, key=lambda c: c.value)
 
     def sell_car_to_customer(self, customer: Customer):
         """
@@ -570,12 +568,16 @@ if __name__ == '__main__':
     blue_car = Car("Audi R4", "blue")
     green_car = Car("Ford", "green")
     wheel = Accessory("Sport wheel", 500)
-    wheel2 = Accessory("Sport wh22eel", 200)
+    wheel2 = Accessory("Spo2rt wheel", 200)
+    wheel3 = Accessory("Spodrt wheel", 300)
     blue_car.add_accessory(wheel)
     blue_car.add_accessory(wheel2)
+    blue_car.add_accessory(wheel3)
     car_dealer = Dealership("Ago Carfriend")
     car_dealer.add_car(blue_car)
     car_dealer.add_car(green_car)
+
+    print(blue_car.get_accessories_by_value())
 
     print(car_dealer.get_all_regular_cars())
     # [This green Ford contains 0 accessories and has 100% fuel left.,
@@ -598,4 +600,3 @@ if __name__ == '__main__':
     customer_premium.make_premium()
     car_dealer.sell_car_to_customer(customer_premium)
     print(customer_premium.get_garage())  # [This blue Audi R4 contains 1 accessories and has 100% fuel left.]
-
