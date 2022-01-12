@@ -401,7 +401,7 @@ class Customer:
         self.wish = wish
         self.name = name
         self.garage = []
-        self.premium_status = bool
+        self.premium_status = False
 
     def get_garage(self):
         """
@@ -412,7 +412,7 @@ class Customer:
         if self.garage:
             return sorted(self.garage, key=lambda c: c.value)
         else:
-            return None
+            return []
 
     def make_premium(self):
         """Make customer a premium customer, premium cars can be sold to the customer now."""
@@ -429,14 +429,16 @@ class Customer:
         Regular driving takes 15 percentage points of fuel, "Rally" takes 35 percentage points (85% - 35% => 50%).
         If the fuel gets to zero during the drive, the car is left behind (it is no longer part of garage).
         """
-        garage = self.get_garage()
         if self.get_garage():
+            garage = self.get_garage()
+            garage = sorted(garage, key=lambda c: (c.fuel, c.value + c.get_value()))
+
+        if driving_style == "Rally":
             cheapest_car = garage[0]
-            if driving_style == "Rally":
-                car = garage[0]
-                car.fuel -= 35
-                if car.fuel <= 0:
-                    garage.remove(car)
+            cheapest_car.fuel -= 35
+        if cheapest_car.fuel <= 0:
+            garage.remove(cheapest_car)
+            return garage
 
 
 class Dealership:
@@ -457,7 +459,7 @@ class Dealership:
         for car in self.inventory:
             if not car.premium:
                 regular_cars.append(car)
-        return sorted(regular_cars, key=lambda c: c.value)
+        return sorted(regular_cars, key=lambda c: c.value + c.get_value())
 
     def make_car_premium(self, car: Car):
         """Make a car premium, which can can be sold only to premium customers."""
@@ -469,7 +471,7 @@ class Dealership:
         for car in self.inventory:
             if car.premium:
                 premium_cars.append(car)
-        return sorted(premium_cars, key=lambda c: c.value)
+        return sorted(premium_cars, key=lambda c: c.value + c.get_value())
 
     def sell_car_to_customer(self, customer: Customer):
         """
