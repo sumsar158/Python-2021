@@ -284,7 +284,7 @@ class University:
         Before unenrolling, you have to make sure the student can be unenrolled.
         Function does not return anything
         """
-        if self.can_enroll_student(student):
+        if self.can_unenroll_student(student):
             self.ENROLLED_STUDENTS.remove(student)
 
     def get_students(self) -> list:
@@ -302,14 +302,17 @@ class University:
         :return: list of Student objects
         """
         highest_gpa = []
-        x = 2.1
+        x = 0
         for student in self.ENROLLED_STUDENTS:
             if student.gpa > x:
                 x = student.gpa
         for student in self.ENROLLED_STUDENTS:
             if student.gpa == x:
                 highest_gpa.append(student)
-                return highest_gpa
+
+        if len(highest_gpa) < 1:
+            return None
+        return highest_gpa
 
 
 class Accessory:
