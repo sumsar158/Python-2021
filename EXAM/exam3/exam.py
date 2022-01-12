@@ -338,10 +338,7 @@ class Car:
         self.fuel = 100
         self.accessories = []
         self.premium = False
-        if self.premium:
-            self.value = 42500
-        else:
-            self.value = 9200
+        self.value = self.get_value()
 
     def add_accessory(self, accessory: Accessory):
         """Add accessory to the car."""
@@ -354,11 +351,15 @@ class Car:
         Regular car base price is 9500, for premium car its 42 500.
         All the values of accessories are summed up.
         """
+        if self.premium:
+            value = 42500
+        else:
+            value = 9200
         if self.accessories:
             for a in self.accessories:
-                self.value += a.value
+                value += a.value
 
-        return self.value
+        return value
 
     def get_fuel_left(self):
         """Return how much fuel is left in percentage."""
@@ -429,16 +430,13 @@ class Customer:
         Regular driving takes 15 percentage points of fuel, "Rally" takes 35 percentage points (85% - 35% => 50%).
         If the fuel gets to zero during the drive, the car is left behind (it is no longer part of garage).
         """
-        if self.get_garage():
-            garage = self.get_garage()
-            garage = sorted(garage, key=lambda c: (c.fuel, c.value + c.get_value()))
+        garage = self.get_garage()
+        garage = sorted(garage, key=lambda c: (c.fuel, c.value + c.get_value()))
+        cheapest_car = garage[0]
 
         if driving_style == "Rally":
-            cheapest_car = garage[0]
-            cheapest_car.fuel -= 35
-        if cheapest_car.fuel <= 0:
-            garage.remove(cheapest_car)
-            return garage
+            fuel_left = cheapest_car.get_fuel_left()
+
 
 
 class Dealership:
