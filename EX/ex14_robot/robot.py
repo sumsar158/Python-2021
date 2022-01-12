@@ -8,6 +8,11 @@ def test_run(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
+    for i in range(15):
+        print(robot.get_position())
+        robot.set_wheels_speed(20)
+        robot.sleep(1)
+        robot.done()
 
 
 def drive_to_line(robot: FollowerBot):
@@ -44,5 +49,5 @@ def the_true_follower(robot: FollowerBot):
 
 
 if __name__ == '__main__':
-    robot = FollowerBot(track_image='track.png', start_x=450, start_y=346)
+    robot = FollowerBot(track_image='track.png', start_x=450, start_y=300)
     follow_the_line(robot)
