@@ -29,6 +29,7 @@ def drive_to_line(robot: FollowerBot):
         robot.set_wheels_speed(0)
         for i in range(6):
             robot.set_wheels_speed(5)
+    robot.done()
 
 
 def follow_the_line(robot: FollowerBot):
