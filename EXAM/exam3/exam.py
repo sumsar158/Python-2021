@@ -241,13 +241,13 @@ class University:
 
         :return: bool
         """
-        if student.gpa > self.gpa_required:
-            if student not in STUDENTS:
+        if student.gpa >= self.gpa_required:
+            if student not in self.ENROLLED_STUDENTS:
                 if student.age >= 16:
                     return True
 
         if len(student.name) == 13:
-            if student not in STUDENTS:
+            if student not in self.ENROLLED_STUDENTS:
                 if student.age >= 16:
                     return True
 
