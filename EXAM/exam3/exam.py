@@ -65,8 +65,6 @@ def encode_string_with_hex_key(input_str: str, key: str) -> str:
 
     :return Encoded string
     """
-    hex = (1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f")
-    encoded_string = ""
     pass
 
 
@@ -431,12 +429,20 @@ class Customer:
         If the fuel gets to zero during the drive, the car is left behind (it is no longer part of garage).
         """
         garage = self.get_garage()
-        garage = sorted(garage, key=lambda c: (c.fuel, c.value + c.get_value()))
-        cheapest_car = garage[0]
 
         if driving_style == "Rally":
-            fuel_left = cheapest_car.get_fuel_left()
+            garage = sorted(garage, key=lambda c: (c.value + c.get_value()))
+            cheapest_car = garage[0]
+            cheapest_car.fuel -= 35
+            if cheapest_car.fuel <= 35:
+                garage.remove(garage[0])
 
+        if driving_style != "Rally":
+            garage = sorted(garage, key=lambda c: (c.fuel, -(c.value + c.get_value())), reverse=True)
+            chosen_car = garage[0]
+            chosen_car.fuel -= 15
+            if chosen_car.fuel <= 15:
+                garage.remove(chosen_car)
 
 
 class Dealership:
