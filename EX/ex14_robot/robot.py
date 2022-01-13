@@ -40,6 +40,33 @@ def drive_to_line(robot: FollowerBot):
     robot.done()
 
 
+def small_turn(robot: FollowerBot):
+    if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() == 0:
+        robot.set_left_wheel_speed(-5)
+        robot.set_right_wheel_speed(10)
+    elif robot.get_third_line_sensor_from_left() == 0 and robot.get_third_line_sensor_from_right() != 0:
+        robot.set_left_wheel_speed(10)
+        robot.set_right_wheel_speed(-5)
+
+
+def medium_turn(robot: FollowerBot):
+    if robot.get_second_line_sensor_from_left() != 0 and robot.get_second_line_sensor_from_right() == 0:
+        robot.set_left_wheel_speed(-10)
+        robot.set_right_wheel_speed(20)
+    elif robot.get_second_line_sensor_from_left() == 0 and robot.get_second_line_sensor_from_right() != 0:
+        robot.set_left_wheel_speed(20)
+        robot.set_right_wheel_speed(-10)
+
+
+def big_turn(robot: FollowerBot):
+    if robot.get_second_line_sensor_from_left() != 0 and robot.get_second_line_sensor_from_right() == 0:
+        robot.set_left_wheel_speed(-15)
+        robot.set_right_wheel_speed(30)
+    elif robot.get_second_line_sensor_from_left() == 0 and robot.get_second_line_sensor_from_right() != 0:
+        robot.set_left_wheel_speed(30)
+        robot.set_right_wheel_speed(-15)
+
+
 def follow_the_line(robot: FollowerBot):
     """
     Create a FollowerBot that will follow a black line until the end of that line.
@@ -48,35 +75,32 @@ def follow_the_line(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
+    condition = False
+    print(robot.get_line_sensors())
+    starting_position = robot.get_position()
 
-    for i in range(280):
-        print(robot.get_left_line_sensor())
-        print(robot.get_right_line_sensor())
+    while not condition:
+        print(robot.get_line_sensors())
         print(robot.get_position())
-        if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() == 0:
-            robot.set_left_wheel_speed(-15)
-            robot.set_right_wheel_speed(30)
-        elif robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() != 0:
-            robot.set_left_wheel_speed(30)
-            robot.set_right_wheel_speed(-10)
-        else:
-            robot.set_wheels_speed(20)
-        robot.sleep(0.1)
 
-    for i in range(280):
-        print(robot.get_left_line_sensor())
-        print(robot.get_right_line_sensor())
-        print(robot.get_position())
-        if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() == 0:
-            robot.set_left_wheel_speed(-20)
-            robot.set_right_wheel_speed(30)
-        elif robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() != 0:
-            robot.set_left_wheel_speed(30)
-            robot.set_right_wheel_speed(-10)
-        else:
-            robot.set_wheels_speed(20)
-        robot.sleep(0.1)
+        if sum(robot.get_line_sensors()) == 0 and robot.get_position() > 2 * starting_position:
+            condition = True
 
+        if robot.get_third_line_sensor_from_left() == 0 or robot.get_third_line_sensor_from_right() == 0:
+            small_turn(robot)
+
+        elif robot.get_second_line_sensor_from_right() == 0 or robot.get_second_line_sensor_from_left() == 0:
+            medium_turn(robot)
+
+        elif robot.get_left_line_sensor() == 0 or robot.get_right_line_sensors() == 0:
+            big_turn(robot)
+
+        else:
+            robot.set_wheels_speed(100)
+        robot.sleep(0.01)
+
+    print(robot.get_line_sensors(), condition)
+    print(robot.get_position())
     robot.done()
 
 
