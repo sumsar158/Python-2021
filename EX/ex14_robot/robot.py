@@ -53,10 +53,10 @@ def follow_the_line(robot: FollowerBot):
         print(robot.get_left_line_sensor())
         print(robot.get_right_line_sensor())
         print(robot.get_position())
-        if robot.get_second_line_sensor_from_left() != 0 and robot.get_second_line_sensor_from_right() == 0:
+        if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() == 0:
             robot.set_left_wheel_speed(-10)
             robot.set_right_wheel_speed(30)
-        elif robot.get_second_line_sensor_from_left() == 0 and robot.get_second_line_sensor_from_right() != 0:
+        elif robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() != 0:
             robot.set_left_wheel_speed(30)
             robot.set_right_wheel_speed(-10)
         else:
