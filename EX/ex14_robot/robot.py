@@ -48,10 +48,20 @@ def follow_the_line(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    for i in range(15):
+    for i in range(280):
+        print(robot.get_left_line_sensor())
+        print(robot.get_right_line_sensor())
         print(robot.get_position())
-        robot.set_wheels_speed(2)
-        robot.sleep(1)
+        if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() == 0:
+            robot.set_left_wheel_speed(-10)
+            robot.set_right_wheel_speed(30)
+        elif robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() != 0:
+            robot.set_left_wheel_speed(30)
+            robot.set_right_wheel_speed(-10)
+        else:
+            robot.set_wheels_speed(30)
+        robot.sleep(0.1)
+
         robot.done()
 
 
@@ -64,5 +74,5 @@ def the_true_follower(robot: FollowerBot):
 
 
 if __name__ == '__main__':
-    robot = FollowerBot(track_image='track.png', start_x=450, start_y=450)
-    drive_to_line(robot)
+    robot = FollowerBot(track_image='track.png', start_x=344, start_y=510)
+    follow_the_line(robot)
