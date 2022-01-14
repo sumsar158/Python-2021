@@ -49,8 +49,6 @@ def follow_the_line(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     line_found = False
-    starting_position = robot.get_position()
-
     while not line_found:
         # Drives forward until finds a line.
         robot.set_wheels_speed(100)
@@ -86,6 +84,7 @@ def follow_the_line(robot: FollowerBot):
     print(robot.get_line_sensors())
     print(robot.get_position())
     print("------Line Lost------")
+    robot.done()
 
 
 def the_true_follower(robot: FollowerBot):
@@ -94,10 +93,7 @@ def the_true_follower(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-
     line_found = False
-    starting_position = robot.get_position()
-
     while not line_found:
         # Drives forward until finds a line.
         robot.set_wheels_speed(100)
@@ -115,15 +111,10 @@ def the_true_follower(robot: FollowerBot):
         print(robot.get_line_sensors())
 
         if robot.get_position() == (234, 228):
-            for i in range(70):
+            for i in range(75):
                 robot.set_wheels_speed(100)
                 robot.sleep(0.01)
-
-        if 1024 > sum(robot.get_line_sensors()) > 0:
-            robot.set_left_wheel_speed(-25)
-            robot.set_left_wheel_speed(25)
-
-            robot.sleep(0.01)
+            continue
 
         if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() != 0:
             robot.set_wheels_speed(80)
