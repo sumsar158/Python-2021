@@ -101,17 +101,18 @@ def follow_the_line(robot: FollowerBot):
             robot.sleep(0.01)
 
         if sum(robot.get_line_sensors()) == 6144:
-            robot.set_left_wheel_speed(-10)
-            robot.set_wheels_speed(0)
+            robot.set_wheels_speed(-100)
+            robot.sleep(0.08)
+
             robot.set_left_wheel_speed(-100)
-            robot.set_right_wheel_speed(5)
-            robot.sleep(0.01)
+            robot.set_right_wheel_speed(10)
+            robot.sleep(0.1)
 
             if sum(robot.get_line_sensors()) == 6144 and robot.get_position() != 2 * starting_position:
                 condition = True
 
         else:
-            robot.set_wheels_speed(50)
+            robot.set_wheels_speed(45)
         robot.sleep(0.01)
 
     print(robot.get_line_sensors(), condition)
