@@ -76,6 +76,7 @@ def follow_the_line(robot: FollowerBot):
 
 
 def hop_over_dotted_line(robot):
+    """Hop function."""
     for i in range(70):
         robot.set_wheels_speed(100)
         robot.sleep(0.01)
