@@ -129,10 +129,11 @@ def the_true_follower(robot: FollowerBot):
                 robot.set_wheels_speed(100)
                 robot.sleep(0.01)
             continue
-        elif robot.get_position() == (135, 142):
-            robot.set_left_wheel_speed(-30)
-            robot.set_right_wheel_speed(30)
+        elif 0 < sum(robot.get_line_sensors()) < 1024:
+            robot.set_left_wheel_speed(-50)
+            robot.set_right_wheel_speed(50)
             robot.sleep(0.01)
+            continue
 
         else:
             robot.set_wheels_speed(65)
