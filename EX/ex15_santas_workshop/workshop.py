@@ -56,7 +56,7 @@ class Person:
         Constructor that creates a person.
 
         :param name: name of the child.
-        :param country: country or origins.
+        :param country: country or origins
         """
         if wishlist is None:
             wishlist = []
