@@ -75,6 +75,12 @@ def follow_the_line(robot: FollowerBot):
     robot.done()
 
 
+def hop_over_dotted_line(robot):
+    for i in range(70):
+        robot.set_wheels_speed(100)
+        robot.sleep(0.01)
+
+
 def the_true_follower(robot: FollowerBot):
     """
     Create a FollowerBot that will follow the black line on the track and make it ignore all possible distractions.
@@ -111,9 +117,7 @@ def the_true_follower(robot: FollowerBot):
         elif robot.get_position() == (236, 228):
             first_hop = True
             # Hop over the gap.
-            for i in range(70):
-                robot.set_wheels_speed(100)
-                robot.sleep(0.01)
+            hop_over_dotted_line(robot)
 
         else:
             robot.set_wheels_speed(65)
@@ -128,9 +132,7 @@ def the_true_follower(robot: FollowerBot):
 
         if robot.get_position() == (294, 228) and turn_around:
             # Hop over on the way back.
-            for i in range(70):
-                robot.set_wheels_speed(100)
-                robot.sleep(0.01)
+            hop_over_dotted_line(robot)
 
     print("------Line Lost------")
     print(robot.get_line_sensors())
