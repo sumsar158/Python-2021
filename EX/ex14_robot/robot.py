@@ -86,10 +86,6 @@ def follow_the_line(robot: FollowerBot):
         print(robot.get_line_sensors())
         print(robot.get_position())
 
-        if sum(robot.get_line_sensors()) == 0 and robot.get_position() > 2 * starting_position:
-            condition = True
-            continue
-
         if robot.get_third_line_sensor_from_left() == 0 or robot.get_third_line_sensor_from_right() == 0:
             small_turn(robot)
             robot.sleep(0.01)
@@ -102,8 +98,12 @@ def follow_the_line(robot: FollowerBot):
             big_turn(robot)
             robot.sleep(0.01)
 
+        if sum(robot.get_line_sensors()) == 6144 and robot.get_position() > 2 * starting_position:
+
+            condition = True
+
         else:
-            robot.set_wheels_speed(40)
+            robot.set_wheels_speed(50)
         robot.sleep(0.01)
 
     print(robot.get_line_sensors(), condition)
@@ -122,3 +122,45 @@ def the_true_follower(robot: FollowerBot):
 if __name__ == '__main__':
     robot = FollowerBot(track_image='track.png', start_x=122, start_y=255)
     follow_the_line(robot)
+
+# def follow_the_line(robot: FollowerBot):
+#     """
+#     Create a FollowerBot that will follow a black line until the end of that line.
+#
+#     The robot's starting position will be just short of the start point of the line.
+#
+#     :param FollowerBot robot: instance of the robot that you need to make move
+#     """
+#     condition = False
+#     print(robot.get_line_sensors())
+#     starting_position = robot.get_position()
+#     robot.set_wheels_speed(50)
+#
+#     while not condition:
+#         print(robot.get_line_sensors())
+#         print(robot.get_position())
+#
+#         if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() != 0:
+#             robot.set_wheels_speed(100)
+#             robot.sleep(0.01)
+#
+#         if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() == 0:
+#             robot.set_left_wheel_speed(-10)
+#             robot.set_right_wheel_speed(15)
+#             robot.sleep(0.01)
+#
+#         elif robot.get_third_line_sensor_from_left() == 0 and robot.get_third_line_sensor_from_right() != 0:
+#             robot.set_left_wheel_speed(15)
+#             robot.set_right_wheel_speed(-10)
+#             robot.sleep(0.001)
+#
+#         if sum(robot.get_line_sensors()) == 0:
+#             condition = True
+#
+#         else:
+#             robot.set_wheels_speed(30)
+#         robot.sleep(0.01)
+#
+#     print(robot.get_line_sensors(), condition)
+#     print(robot.get_position())
+#     robot.done()
