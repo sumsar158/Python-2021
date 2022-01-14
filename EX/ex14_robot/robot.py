@@ -110,12 +110,6 @@ def the_true_follower(robot: FollowerBot):
         print(robot.get_position())
         print(robot.get_line_sensors())
 
-        if robot.get_position() == (234, 228):
-            for i in range(75):
-                robot.set_wheels_speed(100)
-                robot.sleep(0.01)
-            continue
-
         if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() != 0:
             robot.set_wheels_speed(80)
             robot.sleep(0.01)
@@ -129,6 +123,16 @@ def the_true_follower(robot: FollowerBot):
             robot.set_left_wheel_speed(15)
             robot.set_right_wheel_speed(-15)
             robot.sleep(0.001)
+
+        elif robot.get_position() == (236, 228):
+            for i in range(70):
+                robot.set_wheels_speed(100)
+                robot.sleep(0.01)
+            continue
+        elif robot.get_position() == (135, 142):
+            robot.set_left_wheel_speed(-30)
+            robot.set_right_wheel_speed(30)
+            robot.sleep(0.01)
 
         else:
             robot.set_wheels_speed(65)
