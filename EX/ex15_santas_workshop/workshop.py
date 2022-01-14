@@ -71,6 +71,7 @@ class Person:
 
 
 class Product:
+    """Creates a product."""
     def __init__(self, name, price, production_time, weight):
 
         self.name = name
@@ -83,6 +84,7 @@ class Product:
 
 
 class Warehouse:
+    """Creates a warehouse."""
     def __init__(self):
         self.products = {}
 

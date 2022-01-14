@@ -43,16 +43,19 @@ class Order:
 
     def add_product(self, product: tuple):
         """Method for adding a single product to the dictionary."""
-        products_dict = self.products_to_order
 
-        if product[0] not in products_dict.keys():
-            products_dict[product[0]] = 0
-        if product in products_dict.items():
-            products_dict[product[0]] += product[1]
+        if product[0] not in self.products_to_order.keys():
+            self.products_to_order[product[0]] = 0
+        if product in self.products_to_order.items():
+            self.products_to_order[product[0]] += product[1]
 
     def add_products(self, products):
         """Method for adding several products to the dictionary."""
-        pass
+        for p in products:
+            if p[0] not in self.products_to_order.keys():
+                self.products_to_order[p[0]] = 0
+            if p in self.products_to_order.items():
+                self.products_to_order[p[0]] += p[1]
 
     def get_products(self):
         return self.products_to_order
@@ -72,10 +75,10 @@ class App:
 
     def get_products(self) -> list:
         """Getter for products list."""
-        return self.import_products()
+        return self.products
 
     def find_product_by_name(self, name: str) -> Product | None:
-        for product in self.get_products():
+        for product in self.products:
             if product.name == name:
                 return product
 
@@ -83,6 +86,7 @@ class App:
 
     def get_orders(self) -> list:
         """Getter for orders list."""
+        order = Order()
         pass
 
     def import_products(self) -> list[Product]:
@@ -91,16 +95,16 @@ class App:
 
         Filename is an argument here.
         """
-        lines = []
+        self.products = []
         with open("pricelist.txt") as f:
             for line in f:
                 line = line.strip()
                 line = line.replace(" ", "")
                 line = line.split("-")
                 p = Product(name=str(line[0]), price=float(line[-1]))
-                lines.append(p)
-        print(lines)
-        return lines
+                self.products.append(p)
+        print(self.products)
+        return self.products
 
     def order_products(self):
         """Order products in general.
