@@ -9,10 +9,10 @@ def test_run(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     for i in range(15):
-        print(robot.get_position())
         robot.set_wheels_speed(20)
         robot.sleep(1)
-        robot.done()
+
+    robot.done()
 
 
 def drive_to_line(robot: FollowerBot):
@@ -27,13 +27,10 @@ def drive_to_line(robot: FollowerBot):
 
     while not line_detected:
         if robot.get_right_line_sensor() < 1024 or robot.get_left_line_sensor() < 1024:
-            print(robot.get_right_line_sensor(), robot.get_left_line_sensor())
-            print(robot.get_position())
             robot.set_wheels_speed(45)
             robot.sleep(0.5)
-            print(robot.get_position())
-
             line_detected = True
+
         robot.set_wheels_speed(11)
         robot.sleep(0.1)
 
@@ -56,11 +53,6 @@ def follow_the_line(robot: FollowerBot):
         if sum(robot.get_line_sensors()) != 6144:
             line_found = True
 
-            print("------Line Found------")
-            print(robot.get_position())
-            print(robot.get_line_sensors())
-            print("------Line Found------")
-
     while not sum(robot.get_line_sensors()) == 6144:
         if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() != 0:
             robot.set_wheels_speed(80)
@@ -80,10 +72,7 @@ def follow_the_line(robot: FollowerBot):
             robot.set_wheels_speed(40)
             robot.sleep(0.01)
 
-    print("------Line Lost------")
-    print(robot.get_line_sensors())
-    print(robot.get_position())
-    print("------Line Lost------")
+    robot.done()
 
 
 def the_true_follower(robot: FollowerBot):
