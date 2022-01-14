@@ -36,7 +36,7 @@ def create_person_instance(people_dict: dict, wishlist: dict, nice: bool):
     :param people_dict: dictionary of peoples names(key) and their location(value).
     :param wishlist: dictionary of peoples names(key) and their wishes(value).
     :param nice: boolean value is dict about naughty or nice people.
-    :return: confirmation string
+    :return: confirmation string.
     """
     for name, country in people_dict.items():
         for name_in_wishlist, wished_items in wishlist.items():
