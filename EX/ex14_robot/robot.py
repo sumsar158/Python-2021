@@ -87,7 +87,6 @@ def follow_the_line(robot: FollowerBot):
     robot.done()
 
 
-
 def the_true_follower(robot: FollowerBot):
     """
     Create a FollowerBot that will follow the black line on the track and make it ignore all possible distractions.
@@ -125,12 +124,10 @@ def the_true_follower(robot: FollowerBot):
             robot.set_right_wheel_speed(-15)
             robot.sleep(0.001)
 
-
         elif robot.get_position() == (236, 228):
             for i in range(70):
                 robot.set_wheels_speed(100)
                 robot.sleep(0.01)
-
 
         else:
             robot.set_wheels_speed(65)
@@ -145,7 +142,6 @@ def the_true_follower(robot: FollowerBot):
         robot.set_wheels_speed(100)
         robot.sleep(0.1)
     follow_the_line(robot)
-
 
 
 if __name__ == '__main__':
