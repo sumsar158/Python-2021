@@ -40,36 +40,6 @@ def drive_to_line(robot: FollowerBot):
     robot.done()
 
 
-def small_turn(robot: FollowerBot):
-    """Make a small turn."""
-    if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() == 0:
-        robot.set_left_wheel_speed(-5)
-        robot.set_right_wheel_speed(10)
-    elif robot.get_third_line_sensor_from_left() == 0 and robot.get_third_line_sensor_from_right() != 0:
-        robot.set_left_wheel_speed(10)
-        robot.set_right_wheel_speed(-5)
-
-
-def medium_turn(robot: FollowerBot):
-    """Make a medium turn."""
-    if robot.get_second_line_sensor_from_left() != 0 and robot.get_second_line_sensor_from_right() == 0:
-        robot.set_left_wheel_speed(-10)
-        robot.set_right_wheel_speed(20)
-    elif robot.get_second_line_sensor_from_left() == 0 and robot.get_second_line_sensor_from_right() != 0:
-        robot.set_left_wheel_speed(20)
-        robot.set_right_wheel_speed(-10)
-
-
-def big_turn(robot: FollowerBot):
-    """Make a big turn."""
-    if robot.get_second_line_sensor_from_left() != 0 and robot.get_second_line_sensor_from_right() == 0:
-        robot.set_left_wheel_speed(-10)
-        robot.set_right_wheel_speed(15)
-    elif robot.get_second_line_sensor_from_left() == 0 and robot.get_second_line_sensor_from_right() != 0:
-        robot.set_left_wheel_speed(15)
-        robot.set_right_wheel_speed(-10)
-
-
 def follow_the_line(robot: FollowerBot):
     """
     Create a FollowerBot that will follow a black line until the end of that line.
@@ -117,8 +87,6 @@ def follow_the_line(robot: FollowerBot):
     print(robot.get_position())
     print("------Line Lost------")
 
-    robot.done()
-
 
 def the_true_follower(robot: FollowerBot):
     """
@@ -126,6 +94,7 @@ def the_true_follower(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
+
     line_found = False
     starting_position = robot.get_position()
 
@@ -142,6 +111,14 @@ def the_true_follower(robot: FollowerBot):
             print("------Line Found------")
 
     while not sum(robot.get_line_sensors()) == 6144:
+        print(robot.get_position())
+        print(robot.get_line_sensors())
+
+        if robot.get_position() == (234, 228):
+            for i in range(70):
+                robot.set_wheels_speed(100)
+                robot.sleep(0.01)
+
         if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() != 0:
             robot.set_wheels_speed(80)
             robot.sleep(0.01)
@@ -157,7 +134,7 @@ def the_true_follower(robot: FollowerBot):
             robot.sleep(0.001)
 
         else:
-            robot.set_wheels_speed(40)
+            robot.set_wheels_speed(65)
             robot.sleep(0.01)
 
     print("------Line Lost------")
@@ -170,4 +147,4 @@ def the_true_follower(robot: FollowerBot):
 
 if __name__ == '__main__':
     robot = FollowerBot(track_image='track.png', start_x=265, start_y=310)
-    follow_the_line(robot)
+    the_true_follower(robot)
