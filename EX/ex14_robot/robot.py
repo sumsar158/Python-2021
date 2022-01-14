@@ -93,9 +93,7 @@ def the_true_follower(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     line_found = False
-    stop_1 = False
-    stop_2 = False
-    stop_3 = False
+    triggerd = False
     while not line_found:
         # Drives forward until finds a line.
         robot.set_wheels_speed(100)
@@ -103,14 +101,7 @@ def the_true_follower(robot: FollowerBot):
         if sum(robot.get_line_sensors()) != 6144:
             line_found = True
 
-            print("------Line Found------")
-            print(robot.get_position())
-            print(robot.get_line_sensors())
-            print("------Line Found------")
-
     while not sum(robot.get_line_sensors()) == 6144:
-        print(robot.get_position())
-        print(robot.get_line_sensors())
 
         if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() != 0:
             robot.set_wheels_speed(80)
@@ -127,36 +118,24 @@ def the_true_follower(robot: FollowerBot):
             robot.sleep(0.001)
 
         elif robot.get_position() == (236, 228):
-            stop_1 = True
             for i in range(70):
                 robot.set_wheels_speed(100)
                 robot.sleep(0.01)
-        elif robot.get_position() == (126, 136) and stop_1:
-            stop_2 = True
-            robot.set_left_wheel_speed(-100)
-            robot.set_right_wheel_speed(100)
-            robot.sleep(0.3)
-
-        elif robot.get_position() == (294, 228) and stop_2:
-            for i in range(8):
-                robot.set_wheels_speed(100)
-                robot.sleep(0.1)
 
         else:
             robot.set_wheels_speed(65)
             robot.sleep(0.01)
 
-        if robot.get_position() == (126, 136) and stop_1:
-            stop_2 = True
+        if robot.get_position() == (126, 136):
+            triggerd = True
             robot.set_left_wheel_speed(-100)
             robot.set_right_wheel_speed(100)
             robot.sleep(0.3)
 
-        if robot.get_position() == (294, 228) and stop_2:
+        if robot.get_position() == (294, 228) and triggerd:
             for i in range(8):
                 robot.set_wheels_speed(100)
                 robot.sleep(0.1)
-
 
     print("------Line Lost------")
     print(robot.get_line_sensors())
