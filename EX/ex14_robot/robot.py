@@ -41,7 +41,7 @@ def drive_to_line(robot: FollowerBot):
 
 
 def small_turn(robot: FollowerBot):
-    """Makes a small turn."""
+    """Make a small turn."""
     if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() == 0:
         robot.set_left_wheel_speed(-5)
         robot.set_right_wheel_speed(10)
@@ -51,7 +51,7 @@ def small_turn(robot: FollowerBot):
 
 
 def medium_turn(robot: FollowerBot):
-    """Makes a medium turn."""
+    """Make a medium turn."""
     if robot.get_second_line_sensor_from_left() != 0 and robot.get_second_line_sensor_from_right() == 0:
         robot.set_left_wheel_speed(-10)
         robot.set_right_wheel_speed(20)
@@ -61,7 +61,7 @@ def medium_turn(robot: FollowerBot):
 
 
 def big_turn(robot: FollowerBot):
-    """Makes a big turn."""
+    """Make a big turn."""
     if robot.get_second_line_sensor_from_left() != 0 and robot.get_second_line_sensor_from_right() == 0:
         robot.set_left_wheel_speed(-15)
         robot.set_right_wheel_speed(30)
