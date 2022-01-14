@@ -126,8 +126,48 @@ def the_true_follower(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
+    line_found = False
+    starting_position = robot.get_position()
+
+    while not line_found:
+        # Drives forward until finds a line.
+        robot.set_wheels_speed(100)
+        robot.sleep(0.01)
+        if sum(robot.get_line_sensors()) != 6144:
+            line_found = True
+
+            print("------Line Found------")
+            print(robot.get_position())
+            print(robot.get_line_sensors())
+            print("------Line Found------")
+
+    while not sum(robot.get_line_sensors()) == 6144:
+        if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() != 0:
+            robot.set_wheels_speed(80)
+            robot.sleep(0.01)
+
+        if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() != 1024:
+            robot.set_left_wheel_speed(-10)
+            robot.set_right_wheel_speed(15)
+            robot.sleep(0.001)
+
+        elif robot.get_third_line_sensor_from_right() != 0 and robot.get_third_line_sensor_from_left() != 1024:
+            robot.set_left_wheel_speed(15)
+            robot.set_right_wheel_speed(-15)
+            robot.sleep(0.001)
+
+        else:
+            robot.set_wheels_speed(40)
+            robot.sleep(0.01)
+
+    print("------Line Lost------")
+    print(robot.get_line_sensors())
+    print(robot.get_position())
+    print("------Line Lost------")
+
+    robot.done()
 
 
 if __name__ == '__main__':
-    robot = FollowerBot(track_image='track.png', start_x=124, start_y=337)
+    robot = FollowerBot(track_image='track.png', start_x=265, start_y=310)
     follow_the_line(robot)
