@@ -95,21 +95,21 @@ def follow_the_line(robot: FollowerBot):
 
     while not sum(robot.get_line_sensors()) == 6144:
         if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() != 0:
-            robot.set_wheels_speed(100)
+            robot.set_wheels_speed(80)
             robot.sleep(0.01)
 
         if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() != 1024:
             robot.set_left_wheel_speed(-10)
             robot.set_right_wheel_speed(15)
-            robot.sleep(0.01)
+            robot.sleep(0.001)
 
         elif robot.get_third_line_sensor_from_right() != 0 and robot.get_third_line_sensor_from_left() != 1024:
             robot.set_left_wheel_speed(15)
             robot.set_right_wheel_speed(-15)
-            robot.sleep(0.01)
+            robot.sleep(0.001)
 
         else:
-            robot.set_wheels_speed(45)
+            robot.set_wheels_speed(40)
             robot.sleep(0.01)
 
     print("------Line Lost------")
