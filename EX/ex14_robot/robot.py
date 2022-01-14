@@ -41,6 +41,7 @@ def drive_to_line(robot: FollowerBot):
 
 
 def small_turn(robot: FollowerBot):
+    """Makes a small turn."""
     if robot.get_third_line_sensor_from_left() != 0 and robot.get_third_line_sensor_from_right() == 0:
         robot.set_left_wheel_speed(-5)
         robot.set_right_wheel_speed(10)
@@ -50,6 +51,7 @@ def small_turn(robot: FollowerBot):
 
 
 def medium_turn(robot: FollowerBot):
+    """Makes a medium turn."""
     if robot.get_second_line_sensor_from_left() != 0 and robot.get_second_line_sensor_from_right() == 0:
         robot.set_left_wheel_speed(-10)
         robot.set_right_wheel_speed(20)
@@ -59,6 +61,7 @@ def medium_turn(robot: FollowerBot):
 
 
 def big_turn(robot: FollowerBot):
+    """Makes a big turn."""
     if robot.get_second_line_sensor_from_left() != 0 and robot.get_second_line_sensor_from_right() == 0:
         robot.set_left_wheel_speed(-15)
         robot.set_right_wheel_speed(30)
@@ -85,18 +88,22 @@ def follow_the_line(robot: FollowerBot):
 
         if sum(robot.get_line_sensors()) == 0 and robot.get_position() > 2 * starting_position:
             condition = True
+            continue
 
         if robot.get_third_line_sensor_from_left() == 0 or robot.get_third_line_sensor_from_right() == 0:
             small_turn(robot)
+            robot.sleep(0.01)
 
         elif robot.get_second_line_sensor_from_right() == 0 or robot.get_second_line_sensor_from_left() == 0:
             medium_turn(robot)
+            robot.sleep(0.01)
 
         elif robot.get_left_line_sensor() == 0 or robot.get_right_line_sensors() == 0:
             big_turn(robot)
+            robot.sleep(0.01)
 
         else:
-            robot.set_wheels_speed(100)
+            robot.set_wheels_speed(40)
         robot.sleep(0.01)
 
     print(robot.get_line_sensors(), condition)
