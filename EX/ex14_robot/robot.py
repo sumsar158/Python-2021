@@ -82,7 +82,9 @@ def the_true_follower(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     line_found = False
-    triggerd = False
+    turn_around = False
+    first_hop = False
+
     while not line_found:
         # Drives forward until finds a line.
         robot.set_wheels_speed(100)
@@ -107,6 +109,8 @@ def the_true_follower(robot: FollowerBot):
             robot.sleep(0.001)
 
         elif robot.get_position() == (236, 228):
+            first_hop = True
+            # Hop over the gap.
             for i in range(70):
                 robot.set_wheels_speed(100)
                 robot.sleep(0.01)
@@ -115,16 +119,18 @@ def the_true_follower(robot: FollowerBot):
             robot.set_wheels_speed(65)
             robot.sleep(0.01)
 
-        if robot.get_position() == (126, 136):
-            triggerd = True
+        if robot.get_position() == (126, 136) and first_hop:
+            # Turn around on gray.
+            turn_around = True
             robot.set_left_wheel_speed(-100)
             robot.set_right_wheel_speed(100)
             robot.sleep(0.3)
 
-        if robot.get_position() == (294, 228) and triggerd:
-            for i in range(8):
+        if robot.get_position() == (294, 228) and turn_around:
+            # Hop over on the way back.
+            for i in range(70):
                 robot.set_wheels_speed(100)
-                robot.sleep(0.1)
+                robot.sleep(0.01)
 
     print("------Line Lost------")
     print(robot.get_line_sensors())
