@@ -63,11 +63,11 @@ def medium_turn(robot: FollowerBot):
 def big_turn(robot: FollowerBot):
     """Make a big turn."""
     if robot.get_second_line_sensor_from_left() != 0 and robot.get_second_line_sensor_from_right() == 0:
-        robot.set_left_wheel_speed(-15)
-        robot.set_right_wheel_speed(30)
+        robot.set_left_wheel_speed(-25)
+        robot.set_right_wheel_speed(25)
     elif robot.get_second_line_sensor_from_left() == 0 and robot.get_second_line_sensor_from_right() != 0:
-        robot.set_left_wheel_speed(30)
-        robot.set_right_wheel_speed(-15)
+        robot.set_left_wheel_speed(25)
+        robot.set_right_wheel_speed(-25)
 
 
 def follow_the_line(robot: FollowerBot):
@@ -89,11 +89,11 @@ def follow_the_line(robot: FollowerBot):
         print(robot.get_position())
 
         if robot.get_third_line_sensor_from_left() == 0 or robot.get_third_line_sensor_from_right() == 0:
-            small_turn(robot)
+            big_turn(robot)
             robot.sleep(0.01)
 
         elif robot.get_second_line_sensor_from_right() == 0 or robot.get_second_line_sensor_from_left() == 0:
-            medium_turn(robot)
+            big_turn(robot)
             robot.sleep(0.01)
 
         elif robot.get_left_line_sensor() == 0 or robot.get_right_line_sensors() == 0:
@@ -122,5 +122,5 @@ def the_true_follower(robot: FollowerBot):
 
 
 if __name__ == '__main__':
-    robot = FollowerBot(track_image='track.png', start_x=380, start_y=255)
+    robot = FollowerBot(track_image='track.png', start_x=124, start_y=337)
     follow_the_line(robot)
