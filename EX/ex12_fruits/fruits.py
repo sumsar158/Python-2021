@@ -79,12 +79,10 @@ class App:
         """Getter for products list."""
         return self.products
 
-    def find_product_by_name(self, name: str) -> Product | None:
+    def find_product_by_name(self, name: str) -> Product:
         for product in self.products:
             if product.name == name:
                 return product
-
-        return print("Product not found")
 
     def get_orders(self) -> list:
         """Getter for orders list."""
