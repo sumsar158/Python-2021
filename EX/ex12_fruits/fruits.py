@@ -61,6 +61,9 @@ class Order:
     def get_products(self):
         return self.products_to_order
 
+    def get_customer(self):
+        return self.customer
+
 
 class App:
     """
@@ -75,6 +78,9 @@ class App:
         self.products = []
         self.orders = []
         self.customers = []
+
+    def get_customers(self):
+        return self.customers
 
     def get_products(self) -> list:
         """Getter for products list."""
