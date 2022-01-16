@@ -74,7 +74,7 @@ class Product:
     """Creates a product."""
 
     def __init__(self, name, price, production_time, weight):
-        """Creates product parameters."""
+        """Create product parameters."""
         self.name = name
         self.price = price
         self.production_time = production_time
