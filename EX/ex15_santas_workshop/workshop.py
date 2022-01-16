@@ -72,6 +72,7 @@ class Person:
 
 class Product:
     """Creates a product."""
+
     def __init__(self, name, price, production_time, weight):
 
         self.name = name
@@ -80,12 +81,15 @@ class Product:
         self.weight = weight
 
     def __repr__(self):
+        """Represent product class."""
         return f"Product ({self.name}, {self.weight} g)"
 
 
 class Warehouse:
     """Creates a warehouse."""
+
     def __init__(self):
+        """Make product dict for warehouse class."""
         self.products = {}
 
     def get_product_from_factory(self, name: str) -> Product | None:
@@ -116,6 +120,7 @@ class Warehouse:
             return None
 
     def get_product(self, name):
+        """Return product name."""
         return self.products.get(name)
 
 
