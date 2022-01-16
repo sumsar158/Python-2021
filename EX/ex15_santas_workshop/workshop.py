@@ -31,7 +31,7 @@ def get_data_from_local_csv_file(file_path: str) -> dict:
 
 def create_person_instance(people_dict: dict, wishlist: dict, nice: bool):
     """
-    Creates person objects using Person class and adds said objects to global DICT_OF_PEOPLE.
+    Create person objects using Person class and adds said objects to global DICT_OF_PEOPLE.
 
     :param people_dict: dictionary of peoples names(key) and their location(value).
     :param wishlist: dictionary of peoples names(key) and their wishes(value).
@@ -66,7 +66,7 @@ class Person:
         self.wish_list = wishlist
 
     def __repr__(self) -> str:
-        """Returns person name"""
+        """Return person name."""
         return self.name
 
 
@@ -74,7 +74,7 @@ class Product:
     """Creates a product."""
 
     def __init__(self, name, price, production_time, weight):
-
+        """Creates product parameters."""
         self.name = name
         self.price = price
         self.production_time = production_time
@@ -93,6 +93,7 @@ class Warehouse:
         self.products = {}
 
     def get_product_from_factory(self, name: str) -> Product | None:
+        """Return product object from factory."""
         qs = urllib.parse.urlencode({"name": name})
         try:
             with urllib.request.urlopen(API_URL + qs) as f:
@@ -122,11 +123,6 @@ class Warehouse:
     def get_product(self, name):
         """Return product name."""
         return self.products.get(name)
-
-
-def items():
-    for k, v in get_data_from_local_csv_file(WISHLIST_PATH):
-        warehouse.get_product_from_factory(k)
 
 
 if __name__ == '__main__':
