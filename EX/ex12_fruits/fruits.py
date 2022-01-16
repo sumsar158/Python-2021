@@ -72,6 +72,8 @@ class App:
     def __init__(self):
         """App constructor, no arguments expected."""
         self.products = []
+        self.orders = []
+        self.customers = []
 
     def get_products(self) -> list:
         """Getter for products list."""
@@ -86,8 +88,7 @@ class App:
 
     def get_orders(self) -> list:
         """Getter for orders list."""
-        order = Order()
-        pass
+        return self.orders
 
     def import_products(self) -> list[Product]:
         """
@@ -106,16 +107,22 @@ class App:
         print(self.products)
         return self.products
 
-    def order_products(self):
+    def order_products(self, product):
         """Order products in general.
 
         The parameter is list of products. Create a new order, then add passed products to
         this order, then add this order to the orders list.
         Products here is list of tuples.
         """
-        pass
+        order = Order()
+        if type(product) == list:
+            o = order.add_products(products=product)
+            self.orders.append(o)
+        else:
+            o = order.add_product(product)
+            self.orders.append(o)
 
-    def order(self):
+    def order(self, name, orders):
         """
         Method for ordering products for a customer.
 
@@ -123,13 +130,14 @@ class App:
         """
         pass
 
-    def add_customer(self):
+    def add_customer(self, customer):
         """Method for adding a customer to the list."""
-        pass
+        self.customers.append(customer)
 
     def add_customers(self, customers: list['Customer']):
         """Method for adding several customers to the list."""
-        pass
+        for customer in customers:
+            self.customers.append(customer)
 
     def show_all_orders(self) -> str:
         """
@@ -154,9 +162,19 @@ class Customer:
     def __init__(self, name: str, location: str):
         self.location = location
         self.name = name
+        self.orders = []
 
-    pass
+    def add_new_order(self, order):
+        self.orders.append(order)
 
+    def get_name(self):
+        return self.name
+
+    def get_address(self):
+        return self.location
+
+    def get_orders(self):
+        return self.orders
 
 if __name__ == '__main__':
     app = App()
