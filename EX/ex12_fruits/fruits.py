@@ -28,6 +28,7 @@ class Order:
         Expected default customer parameter starting from Part 3. Also, products dictionary
         is expected to be created and products names set as a helper.
         """
+        self.customer = customer
         self.products_to_order = {}
 
     def get_products_string(self) -> str:
@@ -46,7 +47,7 @@ class Order:
 
         if product[0] not in self.products_to_order.keys():
             self.products_to_order[product[0]] = 0
-        if product in self.products_to_order.items():
+        if product[0] in self.products_to_order.keys():
             self.products_to_order[product[0]] += product[1]
 
     def add_products(self, products):
@@ -54,7 +55,7 @@ class Order:
         for p in products:
             if p[0] not in self.products_to_order.keys():
                 self.products_to_order[p[0]] = 0
-            if p in self.products_to_order.items():
+            if p[0] in self.products_to_order.keys():
                 self.products_to_order[p[0]] += p[1]
 
     def get_products(self):
@@ -113,14 +114,15 @@ class App:
         Products here is list of tuples.
         """
         order = Order()
-        if type(product) == list:
-            o = order.add_products(products=product)
-            self.orders.append(o)
-        else:
-            o = order.add_product(product)
-            self.orders.append(o)
 
-    def order(self, name, orders):
+        if type(product) == list:
+            order.add_products(product)
+            self.orders.append(order)
+        else:
+            order.add_product(product)
+            self.orders.append(order)
+
+    def order(self, name, products):
         """
         Method for ordering products for a customer.
 
@@ -133,7 +135,9 @@ class App:
                 ordering_customer = customer
                 break
         if ordering_customer:
-            self.order_products(orders)
+            new_order = Order(customer=ordering_customer)
+            new_order.add_products(products=products)
+            ordering_customer.add_new_order(new_order)
 
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
@@ -169,6 +173,9 @@ class Customer:
         self.name = name
         self.orders = []
 
+    def __repr__(self):
+        return f"{self.name, self.location}"
+
     def add_new_order(self, order):
         self.orders.append(order)
 
@@ -180,6 +187,7 @@ class Customer:
 
     def get_orders(self):
         return self.orders
+
 
 if __name__ == '__main__':
     app = App()
@@ -195,9 +203,16 @@ if __name__ == '__main__':
     app.order("Muhhamad", [("Grenades", 13), ("Cannon", 1), ("Red pepper", 666)])
     app.order("Toivo", [("Granadilla", 3), ("Chestnut", 3), ("Pitaya(Dragon Fruit)", 3)])
 
+    print(app.get_products())
+    print(app.get_orders())
+    print(app.customers)
+    order = Order()
+    print("22")
+    print(order.get_products())
+    print(order.get_products_string())
+
     print(app.find_product_by_name(name="Eggplant"))
     print(app.find_product_by_name(name="lol"))
-
     # Checking products list.
     print(app.get_products())
     print("=======")
