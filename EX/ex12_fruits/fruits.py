@@ -21,7 +21,7 @@ class Product:
 class Order:
     """Order class."""
 
-    def __init__(self):
+    def __init__(self, customer: 'Customer' = None):
         """
         Order constructor.
 
@@ -88,14 +88,14 @@ class App:
         """Getter for orders list."""
         return self.orders
 
-    def import_products(self) -> list[Product]:
+    def import_products(self, file_name: str) -> list[Product]:
         """
         Import products from a file, return list of Product objects.
 
         Filename is an argument here.
         """
         self.products = []
-        with open("pricelist.txt") as f:
+        with open(file_name) as f:
             for line in f:
                 line = line.strip()
                 line = line.replace(" ", "")
@@ -126,7 +126,14 @@ class App:
 
         Products here is list of tuples.
         """
-        pass
+        o = Order()
+        ordering_customer = None
+        for customer in self.customers:
+            if customer.name == name:
+                ordering_customer = customer
+                break
+        if ordering_customer:
+            self.order_products(orders)
 
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
