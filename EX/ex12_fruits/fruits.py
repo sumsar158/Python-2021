@@ -82,6 +82,7 @@ class App:
         self.products = []
         self.orders = []
         self.customers = []
+        self.products_dictionary = {}
 
     def get_customers(self):
         """Return customer list."""
