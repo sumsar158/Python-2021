@@ -61,11 +61,11 @@ class Order:
                 self.products_to_order[p[0]] += p[1]
 
     def get_products(self):
-        """Returns products that are in the order."""
+        """Return products that are in the order."""
         return self.products_to_order
 
     def get_customer(self):
-        """Returns customers name."""
+        """Return customers name."""
         return self.customer
 
 
@@ -84,7 +84,7 @@ class App:
         self.customers = []
 
     def get_customers(self):
-        """Returns customer list."""
+        """Return customer list."""
         return self.customers
 
     def get_products(self) -> list:
@@ -92,7 +92,7 @@ class App:
         return self.products
 
     def find_product_by_name(self, name: str) -> Product:
-        """Takes a product's name as an argument and returns a product object."""
+        """Take a product's name as an argument and returns a product object."""
         for product in self.products:
             if product.name == name:
                 return product
@@ -203,15 +203,15 @@ class Customer:
         self.orders.append(order)
 
     def get_name(self):
-        """Getters for name."""
+        """Getter for name."""
         return self.name
 
     def get_address(self):
-        """Getters for address."""
+        """Getter for address."""
         return self.location
 
     def get_orders(self):
-        """Getters for orders."""
+        """Getter for orders."""
         return self.orders
 
 
