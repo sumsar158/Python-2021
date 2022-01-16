@@ -144,5 +144,5 @@ def the_true_follower(robot: FollowerBot):
 
 
 if __name__ == '__main__':
-    robot = FollowerBot(track_image='track.png', start_x=265, start_y=310, timeout=180)
-    the_true_follower(robot)
+    robot = FollowerBot(track_image='track.png', start_x=265, start_y=350, timeout=180)
+    drive_to_line(robot)

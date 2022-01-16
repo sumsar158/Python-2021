@@ -2,6 +2,7 @@
 import math
 from functools import reduce
 
+
 class Animal:
     """Animal."""
 
@@ -119,6 +120,7 @@ def create_animal_descriptions(animal_list: list) -> list:
     :return: list of animal description strings
     """
     pass
+
 
 if __name__ == '__main__':
     elephant = Animal("African bush elephant", "Loxodonta africana", 70, (3000, 6000), (2.2, 4), "herbivorous",
