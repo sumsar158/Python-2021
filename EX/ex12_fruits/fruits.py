@@ -14,7 +14,7 @@ class Product:
         self.name = name
 
     def __repr__(self):
-        """Represents product by name."""
+        """Represent product by name."""
         return self.name
 
 
@@ -47,7 +47,6 @@ class Order:
 
     def add_product(self, product: tuple):
         """Method for adding a single product to the dictionary."""
-
         if product[0] not in self.products_to_order.keys():
             self.products_to_order[product[0]] = 0
         if product[0] in self.products_to_order.keys():
@@ -62,9 +61,11 @@ class Order:
                 self.products_to_order[p[0]] += p[1]
 
     def get_products(self):
+        """Returns products that are in the order."""
         return self.products_to_order
 
     def get_customer(self):
+        """Returns customers name."""
         return self.customer
 
 
@@ -83,6 +84,7 @@ class App:
         self.customers = []
 
     def get_customers(self):
+        """Returns customer list."""
         return self.customers
 
     def get_products(self) -> list:
@@ -90,6 +92,7 @@ class App:
         return self.products
 
     def find_product_by_name(self, name: str) -> Product:
+        """Takes a product's name as an argument and returns a product object."""
         for product in self.products:
             if product.name == name:
                 return product
@@ -137,7 +140,6 @@ class App:
 
         Products here is list of tuples.
         """
-        o = Order()
         ordering_customer = None
         for customer in self.customers:
             if customer.name == name:
@@ -185,24 +187,31 @@ class App:
 
 class Customer:
     """Customer to implement."""
+
     def __init__(self, name: str, location: str):
+        """Customer class."""
         self.location = location
         self.name = name
         self.orders = []
 
     def __repr__(self):
+        """Representing customer class."""
         return f"{self.name, self.location}"
 
     def add_new_order(self, order):
+        """Method for adding order to list."""
         self.orders.append(order)
 
     def get_name(self):
+        """Getters for name."""
         return self.name
 
     def get_address(self):
+        """Getters for address."""
         return self.location
 
     def get_orders(self):
+        """Getters for orders."""
         return self.orders
 
 
