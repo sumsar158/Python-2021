@@ -40,7 +40,10 @@ class Order:
         of such long string there should be no comma, nor string. Example:
         'Avocado: 2 kg, Orange: 1 kg, Papaya: 3 kg, Cherry tomato: 2 kg'
         """
-        pass
+        s = ""
+        for k, v in self.products_to_order:
+            s += f"{str(k)}, {str(v)} kg, "
+        return s
 
     def add_product(self, product: tuple):
         """Method for adding a single product to the dictionary."""
@@ -154,14 +157,22 @@ class App:
         for customer in customers:
             self.customers.append(customer)
 
-    def show_all_orders(self) -> str:
+    def show_all_orders(self, is_summary: bool) -> str:
         """
         Method for returning all orders for all customers.
 
         If is_summary is true, add totals for each customer
         and also global total price.
         """
-        pass
+        s = ""
+        nl = '\n'
+        if not is_summary:
+            for customer in self.customers:
+                s += f"{customer.name}: {nl}"
+                for order in customer.orders:
+                    s += f"{order.get_products_string} {nl}"
+                s += nl
+        return s
 
     def calculate_total(self) -> float:
         """Method for calculating total price for all customer's orders."""
