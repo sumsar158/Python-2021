@@ -56,7 +56,12 @@ def reverse_subword(s: str, subword: str) -> str:
     :param subword: len(subword) > 0
     :return:
     """
-    pass
+    start = s.find(subword)
+    end = len(subword)
+    list_s = list(s)
+    list_s[start:end] = list_s[start:end][::-1]
+    list_s = "".join(list_s)
+    return list_s
 
 
 def sum_of_multipliers(first_num: int, second_num: int, limit: int) -> int:
@@ -85,9 +90,9 @@ def sum_of_multipliers(first_num: int, second_num: int, limit: int) -> int:
     second_num_multipliers = []
     final_list = []
 
-    # Sn = n(T1+Tn)/2
+    # S= n(2a + (n-1)d)/2
 
-    return int((first_num*(1+limit)/2) + (second_num*(1+limit)/2))
+    pass
 
 
 def recursive_max(numbers: list) -> int:
@@ -139,8 +144,14 @@ def make_cupboard(total_width: int, total_height: int, levels: int, sections_on_
     #             #             #             #
     ###########################################
     """
-    pass
+    sections_on_levels.reverse()
+    shelf = ""
+    for section in sections_on_levels:
+        for i in range(total_height+1):
+            if i == 0:
+                shelf += total_width * "#" + '\n'
 
+    print(shelf)
 
 class Book:
     """Represent book model."""
@@ -530,53 +541,8 @@ class ComputerStore:
 
 if __name__ == '__main__':
 
-    # Book store
+    assert reverse_subword("tere", "ab") == "tere"
+    assert reverse_subword("tere", "te") == "etre"
+    assert reverse_subword("teretere", "te") == "etretere"
 
-    store = Store("Apollo", 98.9)
-    book = Book("War & Peace", "Leo Tolstoy", 10.5, 99)
 
-    print(store.can_add_book(book))  # True
-
-    store.add_book(book)
-    print(store.get_all_books())  # [book]
-
-    book2 = Book("War & Peace", "Leo Tolstoy", 10.5, 99)
-    assert store.can_add_book(book2) is False  # cannot add book with the same title and author
-
-    book3 = Book("War", "Leo Tolstoy", 10.5, 80)
-    assert store.can_add_book(book3) is False  # cannot add book since its rating is too low
-
-    # Start of OOP2 ComputerStore
-    computer1 = Computer("pc", 3)
-    computer1.add_part(ComputerPart("cpu", 200))
-    computer1.add_part(ComputerPart("mobo", 60.5))
-    computer1.add_part(ComputerPart("case", 70))
-
-    assert computer1.get_cost() == 330.5
-    assert computer1.is_working() is True
-
-    computer2 = Computer("laptop", 3)
-    computer2.add_part(ComputerPart("display", 160))
-    computer2.add_part(ComputerPart("keyboard", 20))
-
-    assert repr(computer2) == "A laptop for 180.00€ with display, keyboard"
-    assert computer2.is_working() is False
-
-    store = ComputerStore()
-    store.add_part(ComputerPart("mousepad", 36))
-    store.add_computer(computer1)
-    store.add_computer(computer2)
-
-    assert len(store.get_computers()) == 2  # 2 computers are in the store
-    assert len(store.get_working_computers()) == 1  # 1 computer is working
-
-    store.build_computer()  # add mousepad to laptop
-
-    assert len(store.get_working_computers()) == 2  # both computers are working now
-
-    laura = Customer("Laura", 1000)
-
-    store.sell_customer_computer(laura)  # sell pc to laura
-
-    assert len(store.get_computers()) == 1  # only laptop left in store
-    assert repr(laura) == "Laura with 669.50€\nA pc for 330.50€ with cpu, mobo, case"  # Laura has a pc now
