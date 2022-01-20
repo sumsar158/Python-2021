@@ -65,6 +65,7 @@ def encode_string_with_hex_key(input_str: str, key: str) -> str:
 
     :return Encoded string
     """
+
     pass
 
 
