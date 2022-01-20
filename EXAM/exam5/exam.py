@@ -57,12 +57,12 @@ def reverse_subword(s: str, subword: str) -> str:
     :return:
     """
     start = s.find(subword)
-    print(start)
     end = len(subword)
-    print(end)
     list_s = list(s)
+
     list_s[start:end+start] = list_s[start:start+end][::-1]
     list_s = "".join(list_s)
+
     return list_s
 
 
@@ -90,11 +90,20 @@ def sum_of_multipliers(first_num: int, second_num: int, limit: int) -> int:
     """
     first_num_multipliers = []
     second_num_multipliers = []
-    final_list = []
 
-    # S= n(2a + (n-1)d)/2
+    for i in range(first_num, limit+1):
+        if i % first_num == 0:
+            first_num_multipliers.append(i)
 
-    pass
+    for i in range(second_num, limit+1):
+        if i % second_num == 0:
+            second_num_multipliers.append(i)
+
+    for i in first_num_multipliers:
+        if i not in second_num_multipliers:
+            second_num_multipliers.append(i)
+
+    return sum(second_num_multipliers)
 
 
 def recursive_max(numbers: list) -> int:
@@ -543,7 +552,10 @@ class ComputerStore:
 
 if __name__ == '__main__':
 
+    assert sum_of_multipliers(3, 3, 20) == 63
+    assert sum_of_multipliers(3, 1, 20) == 210
 
-    print(reverse_subword('tere', 're'))
+
+
 
 
