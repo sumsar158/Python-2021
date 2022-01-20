@@ -89,7 +89,6 @@ def filter_by_hashtag(tweets: list, hashtag: str) -> list:
     :return: Filtered list of tweets.
     """
     filterd_tweets = []
-
     for tweet in tweets:
         if hashtag in tweet.content:
             filterd_tweets.append(tweet)
