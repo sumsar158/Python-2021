@@ -553,15 +553,4 @@ class ComputerStore:
 
 
 if __name__ == '__main__':
-
-    cupboard = make_cupboard(43, 6, 1, [3])
-    print(cupboard)
-    assert cupboard[-1] != "\n"
-    rows = cupboard.split("\n")
-    assert len(rows) == 6
-    assert rows[0] == "#" * 43
-    assert rows[1] == ("#" + " " * 13) * 3 + "#"
-
-
-
-
+    pass
