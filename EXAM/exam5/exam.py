@@ -158,11 +158,13 @@ def make_cupboard(total_width: int, total_height: int, levels: int, sections_on_
     sections_on_levels.reverse()
     shelf = ""
     for section in sections_on_levels:
-        for i in range(total_height+1):
-            if i == 0:
-                shelf += total_width * "#" + '\n'
+        shelf += total_width * "#" + '\n'
+        for i in range((total_height//levels)-1):
+            shelf += "#" + (section-1)*((total_width//section-1) * " " + "#") + ((total_width//section)-2) * " " + "#" + "\n"
+    shelf += total_width * "#" + '\n'
 
     print(shelf)
+
 
 class Book:
     """Represent book model."""
@@ -552,9 +554,13 @@ class ComputerStore:
 
 if __name__ == '__main__':
 
-    assert sum_of_multipliers(3, 3, 20) == 63
-    assert sum_of_multipliers(3, 1, 20) == 210
-
+    cupboard = make_cupboard(43, 6, 1, [3])
+    print(cupboard)
+    assert cupboard[-1] != "\n"
+    rows = cupboard.split("\n")
+    assert len(rows) == 6
+    assert rows[0] == "#" * 43
+    assert rows[1] == ("#" + " " * 13) * 3 + "#"
 
 
 
