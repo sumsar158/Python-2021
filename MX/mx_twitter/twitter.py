@@ -23,13 +23,14 @@ class Tweet:
             self.popularity_index = time / retweets
 
         self.hastag = ""
-        for letter in content:
-            if letter == "#":
-                continue
-            if letter == " ":
-                break
-            else:
-                self.hastag += letter
+        con = False
+        start = content.find("#")
+        while not con:
+            for letter in content[start:]:
+                if not letter.isalpha() or letter == " ":
+                    con = True
+                else:
+                    self.hastag += letter
 
     def __repr__(self):
         return self.content
@@ -111,6 +112,7 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     :param tweets: Input list of tweets.
     :return: List of hashtags by popularity.
     """
+    print(tweets)
     return sorted(tweets, key=lambda p: (-p.retweets, p.hastag))
 
 
@@ -119,7 +121,9 @@ if __name__ == '__main__':
     tweet2 = Tweet("@elonmusk", "Technically, alcohol is a solution #bigsmart", 366.4, 166500)
     tweet3 = Tweet("@CIA", "We can neither confirm nor deny that this is our first tweet. #heart", 2192, 284200)
     tweets = [tweet1, tweet2, tweet3]
-
+    print(tweet1.hastag)
+    print(tweet2.hastag)
+    print(tweet3.hastag)
     print(find_fastest_growing(tweets).user)  # -> "@elonmusk"
 
     filtered_by_popularity = sort_by_popularity(tweets)
@@ -132,4 +136,5 @@ if __name__ == '__main__':
     print(filtered_by_hashtag[1].user)  # -> "@elonMusk"
 
     sorted_hashtags = sort_hashtags_by_popularity(tweets)
+    print(sorted_hashtags)
     print(sorted_hashtags[0])  # -> "#heart"
