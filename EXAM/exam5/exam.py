@@ -57,9 +57,11 @@ def reverse_subword(s: str, subword: str) -> str:
     :return:
     """
     start = s.find(subword)
+    print(start)
     end = len(subword)
+    print(end)
     list_s = list(s)
-    list_s[start:end] = list_s[start:end][::-1]
+    list_s[start:end+start] = list_s[start:start+end][::-1]
     list_s = "".join(list_s)
     return list_s
 
@@ -541,8 +543,7 @@ class ComputerStore:
 
 if __name__ == '__main__':
 
-    assert reverse_subword("tere", "ab") == "tere"
-    assert reverse_subword("tere", "te") == "etre"
-    assert reverse_subword("teretere", "te") == "etretere"
+
+    print(reverse_subword('tere', 're'))
 
 
