@@ -22,18 +22,23 @@ class Tweet:
         if retweets != 0:
             self.popularity_index = time / retweets
 
-        self.hastag = ""
-        con = False
-        start = content.find("#")
-        while not con:
-            for letter in content[start:]:
-                if not letter.isalpha() or letter == " ":
-                    con = True
-                else:
-                    self.hastag += letter
+        self.hastag = find_hastag(content)
 
     def __repr__(self):
         return self.content
+
+
+def find_hastag(content):
+    con = False
+    hastag = ""
+    start = content.find("#")
+    while not con:
+        for letter in content[start:]:
+            if not letter.isalpha() or letter == " ":
+                con = True
+            else:
+                hastag += letter
+    return hastag
 
 
 def find_fastest_growing(tweets: list) -> Tweet:
