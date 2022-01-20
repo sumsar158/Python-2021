@@ -22,6 +22,15 @@ class Tweet:
         if retweets != 0:
             self.popularity_index = time / retweets
 
+        self.hastag = ""
+        for letter in content:
+            if letter == "#":
+                continue
+            if letter == " ":
+                break
+            else:
+                self.hastag += letter
+
     def __repr__(self):
         return self.content
 
@@ -102,7 +111,7 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     :param tweets: Input list of tweets.
     :return: List of hashtags by popularity.
     """
-    return sorted(tweets, key=lambda p: p.retweets, reverse=True)
+    return sorted(tweets, key=lambda p: (-p.retweets, p.hastag))
 
 
 if __name__ == '__main__':
