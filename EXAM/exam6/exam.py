@@ -561,8 +561,9 @@ class Student:
         """
         total_eap = 0
         for s in self.curriculum.subjects:
+            print(type(s))
             if s.grade and s.grade > 0:
-                total_eap += s.get_eaps()
+                total_eap += s.eaps
         return total_eap
 
     def get_curriculum(self):
@@ -577,7 +578,8 @@ class Student:
         """Retrun subjects eaps."""
         for s in self.curriculum.subjects:
             if s == subject:
-                return s.get_eaps()
+                print(type(s))
+                return s.eaps
 
 
 class Subject:
@@ -673,10 +675,10 @@ if __name__ == '__main__':
     subj1 = Subject("lineaar", 6)
     subj2 = Subject("matanaal", 5)
     subj3 = Subject("java", 4)
-
     student.get_curriculum().add_subject(subj1)
     student.get_curriculum().add_subject(subj2)
     student.get_curriculum().add_subject(subj3)
+    print(student.get_subject_eaps(subj1))
 
     student.add_grade(subj1, 3)
     student.add_grade(subj2, 5)
