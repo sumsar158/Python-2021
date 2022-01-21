@@ -562,7 +562,7 @@ class Student:
         total_eap = 0
         for s in self.curriculum.subjects:
             if s.grade and s.grade > 0:
-                total_eap += s.eaps
+                total_eap += s.get_eaps()
         return total_eap
 
     def get_curriculum(self):
@@ -577,7 +577,7 @@ class Student:
         """Retrun subjects eaps."""
         for s in self.curriculum.subjects:
             if s == subject:
-                return s.eaps
+                return s.get_eaps()
 
 
 class Subject:
@@ -667,32 +667,28 @@ class Curriculum:
 
 
 if __name__ == '__main__':
-    # OOP1 - stargate
+    # OOP2 - student
+    student = Student(Curriculum())
 
-    sg1 = Stargate("Earth", True)
-    sg2 = Stargate("Another planet", False)
-    assert sg1.dial(sg2) is True
-    assert sg1.get_connected_planet_name() == "Another planet"
+    subj1 = Subject("lineaar", 6)
+    subj2 = Subject("matanaal", 5)
+    subj3 = Subject("java", 4)
 
-    print(sg2.active_connection)
-    print(sg1.active_connection)
+    student.get_curriculum().add_subject(subj1)
+    student.get_curriculum().add_subject(subj2)
+    student.get_curriculum().add_subject(subj3)
 
-    sg2.disconnect()
+    student.add_grade(subj1, 3)
+    student.add_grade(subj2, 5)
 
-    print(sg2.get_connected_planet_name())
-    print(sg1.get_connected_planet_name())
-    print(sg2.active_connection)
-    print(sg1.active_connection)
+    assert student.get_subject_grade(subj3) is None
+    assert student.get_eaps() == 11
+    assert student.get_subject_grade(subj2) == 5
+    assert student.get_average_grade() == 4
 
-    assert sg2.get_connected_planet_name() == "Earth"
-    sg1.disconnect()
+    student.add_grade(subj2, 3)
 
-    print(sg2.active_connection)
-    print(sg1.active_connection)
-    print("--------------")
+    assert student.get_subject_grade(subj2) == 3
+    assert student.get_average_grade() == 3
 
-    assert sg2.dial(sg1) is False
-    assert sg2.get_connected_planet_name() is None
-    print("--------------")
-    print(sg2.active_connection)
-    print(sg1.active_connection)
+    assert student.get_curriculum().get_subject("java") == subj3
